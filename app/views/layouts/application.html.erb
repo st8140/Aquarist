@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TweetApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <header>
+    <div class="header-logo">
+      <%= link_to("TweetApp","/") %>
+    </div>
+    <ul class="header-menus">
+      <li>
+      <%= link_to("TweetAppとは","/about") %>
+      </li>
+    </ul>
+  </header>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
