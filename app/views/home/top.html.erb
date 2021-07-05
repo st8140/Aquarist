@@ -1,7 +1,39 @@
+<div class="top">
+  <div class="top-main cover">
+    <header>
+      <%= render "layouts/top_header" %>
+    </header>
+    <div class="top-text">
+      <h1 class="text-center text-light mb-4 font-monospace top-text-logo"><i class="fas fa-fish"></i>Aquarist</h1>
+      <h3 class="text-center text-light">あなたのアクアリウムをシェアしてみよう！</h3>
+    </div>
+  </div>
 
-<div class="main top-main">
-  <div class="top-message">
-    <h2 class="bg-primary">つぶやきで、世界はつながる</h2>
-    <p>今の気持ちをつぶやいてみよう！</p>
+  <div class="container mt-5">
+    <div class="about pb-5" id="about">
+      <h1 class=" about-heading text-center mb-3 pt-3 pb-2">
+        "Aquarist"
+        <span class="fs-4">とは?</span>
+      </h1>
+      <h4 class="about-sub-heading text-center py-4">
+        <span class="text-primary">"Aquarist"</span>
+        はアクアリウムのシェアサイトです。
+      </h4>
+      <p class=" about-text text-center">
+        アクアリウム（Aquarium）とは、「水族館またはガラス張りの養魚水槽」などと訳されます。
+        <br>
+        この趣味の世界では主に水槽を利用して、熱帯魚（熱帯地域原産の魚）や水草を育てることを指しています。
+        <br>
+        アクアリウムは昔から好まれてきた趣味の一つですが、種類や楽しみ方の広がりから、近年特に人気が高まっています。
+      </p>
+      <div class="row px-3 about-image">
+        <%= image_tag "nettaigyo.jpg", class: "col-lg-6 about-image-1" %>
+        <%= image_tag "kumanomi.jpg" , class: "col-lg-6" %>
+      </div>
+      <p class=" about-text text-center mt-3">
+        昨今のコロナ禍の影響もあり、趣味として始める人が急増しているこのアクアリウム
+        <br>
+        同じ趣味を持った方々の交流の場になればという想いで作成致しました。
+      </p>
   </div>
 </div>
