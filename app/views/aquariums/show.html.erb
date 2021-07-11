@@ -1,0 +1,38 @@
+<%= provide(:title, "aquariums") %>
+<div class="main-content my-4">
+  <div class="container">
+      <div class="bg-color aquariums-nav-sp d-lg-none">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Active</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-9 bg-color aquariums">
+        <div class="aquariums-image">
+          <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", size: "600", class: "img-fluid img-thumbnail aquarium-image"), "#" %>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 ps-5">
+            <p>いいね！</p> <!-- 後でeachに対応したものに置き換える -->
+            <p>introduction</p> <!-- 後でeachに対応したものに置き換える -->
+          </div>
+          <div class="col-lg-4 aquariums-user pe-5">
+            <div class="user-icon mb-1">
+              <%= link_to image_tag("default_user.png", alt: "user-image", size: "60"), "#" %>
+            </div>
+              <p>user.name</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

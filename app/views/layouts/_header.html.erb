@@ -1,27 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" data-toggle="tooltip">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <div class="container-fluid">
-    <%= link_to "/", class: "navbar-brand ms-5 me-5" do %>
-      <p class="mb-0 fs-3 logo"><i class="fas fa-fish"></i>Aquarist</p>
-    <% end %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+    <% if user_signed_in? %>
+      <%= link_to "/", class: "navbar-brand ms-2 me-5" do %>
+        <p class="mb-0 fs-3 logo"><i class="fas fa-fish"></i>Aquarist</p>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
+        <i class="fas fa-bars" style="color: #fff; font-size: 30px;"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto fs-4">
           <li class="nav-item">
-            <%= link_to "Shop search", "#", class: "nav-link fs-3 me-4" %>
+            <%= link_to "Shop search", "#", class: "nav-link me-4" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Log out", "#", class: "nav-link fs-3 me-5" %>
+            <%= link_to "Log out", "#", class: "nav-link me-5" %>
           </li>
-          <li class="nav-item fs-3  ms-5 me-2 pt-2">
+          <li class="nav-item ms-5 me-2 pt-2 nav-user-name">
             user.name
           </li>
-          <li class="nav-item me-3">
+          <li class="nav-item me-3 user-icon">
             <%= link_to image_tag("default_user.png", alt: "ユーザー.img", size: "50"), "#", class: "nav-link" %>
           </li>
         </ul>
-    </div>
+      </div>
+    <% else %>
+      <%= link_to "/", class: "navbar-brand ms-2 me-5" do %>
+        <p class="mb-0 fs-3 logo"><i class="fas fa-fish"></i>Aquarist</p>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
+        <i class="fas fa-bars" style="color: #fff; font-size: 30px;"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav fs-4">
+          <li class="nav-item me-4">
+            <%= link_to "Log in", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item me-3">
+            <%= link_to "新規登録", "#", class: "nav-link" %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </nav>
 

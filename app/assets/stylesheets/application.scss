@@ -31,6 +31,19 @@ body {
   background-blend-mode: lighten;
 }
 
+// .top-main {
+//   position: absolute;
+// }
+
+.top-text {
+  position: relative;
+  top: 280px;
+}
+
+.nav-user-name {
+  color: #fff;
+}
+
 .navbar-light .navbar-nav .nav-link:hover{
   color: #FFFF00;
   }
@@ -39,53 +52,129 @@ body {
   color: #FFF;
   }
 
-  .navbar-light .navbar-brand:hover {
-    color: #FFFF00;
+.navbar-light .navbar-brand:hover {
+  color: #FFFF00;
+}
+
+.navbar-light .navbar-brand {
+  color: #FFF;
+}
+
+.top-text-logo {
+  font-size: 100px;
+}
+
+.navbar-light .navbar-toggler{
+  border-color: #fff;
+}
+
+.bg-color{
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.about-heading {
+  border-bottom: 1px solid #0d6efd;
+  color: #0d6efd;
+  font-size: 50px;
+  letter-spacing: 3px;
+}
+
+.about-sub-heading {
+  font-weight: bold;
+}
+
+.about-text {
+  line-height: 50px;
+  font-weight: bold;
+}
+
+.about-image img{
+  border-radius: 50px;
+}
+
+@media screen and ( max-width:992px ) {
+  .about-image img {
+    margin-bottom: 15px;
+  }
+}
+
+// ------------------------------------------ aquariums_index ------------------------------------------ //
+
+.aquariums-image {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.sidebar {
+  height: 100vh;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.posts .user-icon {
+  float: left;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.posts .row {
+  padding: 20px 0;
+}
+
+.time-stamp {
+  color: #dcdcdc;
+}
+
+.introduction {
+  margin: 20px 0;
+}
+
+.p-4.bg-color {
+  max-width: 80%;
+}
+
+.comment-count {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+@media screen and ( max-width:992px ) {
+  .aquariums {
+    margin-left: initial;
+    margin-bottom: 15px;
   }
 
-  .navbar-light .navbar-brand {
-    color: #FFF;
+  .aquariums-nav-sp {
+    margin-bottom: 15px;
   }
 
-  .top-text {
-    margin-top: 220px;
+  .p-4.bg-color {
+    max-width: 100%;
   }
 
-  .top-text-logo {
-    font-size: 100px;
+  td.d-lg-none {
+    text-align: center;
   }
 
-  .navbar-light .navbar-toggler{
-    border-color: #fff;
+  .posts .user-icon {
+    float: initial;
+    margin-right: initial;
   }
 
-  #about {
-    background-color: #fff;
-    border-radius: 20px;
+  .user-name {
+    margin-bottom: -20px;
   }
 
-  .about-heading {
-    border-bottom: 1px solid #0d6efd;
-    color: #0d6efd;
-    font-size: 50px;
-    letter-spacing: 3px;
+  .introduction {
+    margin-bottom: 20px;
   }
 
-  .about-sub-heading {
-    font-weight: bold;
+  .time-stamp {
+    margin-bottom: 20px;
   }
-
-  .about-text {
-    line-height: 50px;
-    font-weight: bold;
-  }
-
-  .about-image img{
-    border-radius: 50px;
-  }
-
-  @media screen and ( max-width:992px ) {
-    .about-image img {
-      margin-bottom: 15px;
-    }
-  }
+}
