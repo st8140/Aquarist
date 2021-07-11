@@ -21,6 +21,10 @@ body {
   background-color: #e0ffff;; 
 }
 
+a {
+  text-decoration: none;
+}
+
 // ------------------------------------------ top ------------------------------------------ //
 
 .cover {
@@ -30,10 +34,6 @@ body {
   background-color: #00008b;
   background-blend-mode: lighten;
 }
-
-// .top-main {
-//   position: absolute;
-// }
 
 .top-text {
   position: relative;
@@ -177,4 +177,57 @@ body {
   .time-stamp {
     margin-bottom: 20px;
   }
+}
+
+// ------------------------------------------ users_sessions_new ------------------------------------------ //
+
+.device-form h2 {
+  font-size: 50px;
+  margin-bottom: 60px;
+  letter-spacing: 3px;
+}
+
+.field {
+  margin-top: 15px;
+}
+
+.actions {
+  margin-top: 15px;
+}
+
+.device {
+  padding-top: 36px;
+  font-size: 16px;
+}
+
+.device-form {
+  max-width: 600px;
+  text-align: center;
+  padding: 24px;
+  margin: 0px auto;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.device-inner {
+  width: 360px;
+  margin: 0px auto;
+}
+
+.device a {
+  color: #007bff !important;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.remenber-me {
+  margin-bottom: -5px;
+} 
+
+.test-user-login a {
+  color: #fff !important;
 }

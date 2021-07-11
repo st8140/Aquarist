@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   } 
 
   devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
+    get "sign_up", :to => "users/registrations#new"
+    get "log_in", :to => "users/sessions#new"
+    get "log_out", :to => "users/sessions#destroy"
     get "user/:id", :to => "users/registrations#detail"
-    get "signup", :to => "users/registrations#new"
-    get "login", :to => "users/sessions#new"
-    get "logout", :to => "users/sessions#destroy"
   end
+
   root 'home#top'
   get '/' => 'home#top'
   resources :aquariums
