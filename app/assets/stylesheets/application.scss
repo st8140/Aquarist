@@ -25,6 +25,22 @@ a {
   text-decoration: none;
 }
 
+a.nav-link {
+  color: #222;
+  font-weight: bold;
+}
+
+.flash {
+  color: white;
+  text-align: center;
+  &__alert{
+    background-color: red;
+  }
+  &__notice {
+    background-color: blue;
+  }
+}
+
 // ------------------------------------------ top ------------------------------------------ //
 
 .cover {
@@ -93,6 +109,10 @@ a {
   border-radius: 50px;
 }
 
+.active {
+  border-right: 3px solid #4a90e2;
+}
+
 @media screen and ( max-width:992px ) {
   .about-image img {
     margin-bottom: 15px;
@@ -111,7 +131,7 @@ a {
 }
 
 .sidebar {
-  height: 100vh;
+  height: 80vh;
   margin-left: 10px;
   margin-right: 20px;
 }
@@ -230,4 +250,32 @@ a {
 
 .test-user-login a {
   color: #fff !important;
+}
+
+// ------------------------------------------ users_registrations_detail ------------------------------------------ //
+
+
+a.nav-link.active {
+  color: #4a90e2;
+}
+
+.user .user-detail-box {
+  max-width: 880px;
+  margin: 30px auto;
+}
+
+.user .update-content {
+  border-bottom: 1px solid #eaedef;
+  padding: 20px;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.col-md-8.user-detail.bg-color {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.detail-heading {
+  font-size: 30px;
 }

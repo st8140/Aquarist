@@ -1,0 +1,71 @@
+<%= provide(:title, "user_detail") %>
+<div class="container user py-4">
+  <div class="row">
+    <div class="col-lg-2 sidebar bg-color p-4 d-none d-lg-block">
+      <ul class="nav flex-column user-nav-pc">
+        <li class="nav-item">
+          <%= link_to "アカウント", detail_path(current_user.id), class: "nav-link active" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "投稿一覧", "#", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいね！", "#", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規投稿", "#", class: "nav-link" %>
+        </li>
+      </ul>
+
+    </div>
+    <div class="col-lg-2 bg-color d-lg-none user-nav-sp">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <%= link_to "アカウント", detail_path(current_user.id), class: "nav-link active" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "投稿一覧", "#", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいね！", "#", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規投稿", "#", class: "nav-link" %>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="col-md-8 user-detail bg-color">
+      <div class="user-detail-box">
+        <div class="update-content">
+          <div class="row">
+            <h5 class="detail-heading">アカウント</h5>
+          </div>
+        </div>
+        
+        <div class="update-content">
+          <div class="row">
+            <label class="col-md-5" for="email">メールアドレス</label>
+            <div class="col-md-7"><%= current_user.email %></div>
+          </div>
+        </div>
+        
+        <div class="update-content">
+          <div class="row">
+            <label class="col-md-5" for="password">パスワード</label>
+            <div class="col-md-7">*********</div>
+          </div>
+        </div>
+        
+        <div class="update-content">
+          <div class="row">
+          <p>
+            <%= link_to "編集", edit_user_registration_path, class: "col-md-2 btn btn-primary mx-3" %>
+          </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <div class="container-fluid">
+    <%= link_to "/", class: "navbar-brand ms-2 me-5" do %>
+      <p class="mb-0 fs-3 logo"><i class="fas fa-fish"></i>Aquarist</p>
+    <% end %>
     <% if user_signed_in? %>
-      <%= link_to aquarium_path, class: "navbar-brand ms-2 me-5" do %>
-        <p class="mb-0 fs-3 logo"><i class="fas fa-fish"></i>Aquarist</p>
-      <% end %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
         <i class="fas fa-bars" style="color: #fff; font-size: 30px;"></i>
@@ -13,21 +13,19 @@
           <li class="nav-item">
             <%= link_to "Shop search", "#", class: "nav-link me-4" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link me-5" %>
-          </li>
-          <li class="nav-item ms-5 me-2 pt-2 nav-user-name">
-            user.name
-          </li>
-          <li class="nav-item me-3 user-icon">
-            <%= link_to image_tag("default_user.png", alt: "ユーザー.img", size: "50"), "#", class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag("default_user.png", alt: "ユーザー.img", size: "50") %>
+              <%= current_user.name %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><%= link_to "アカウント", detail_path(current_user.id), class: "dropdown-item" %></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+            </ul>
           </li>
         </ul>
       </div>
     <% else %>
-      <%= link_to "/", class: "navbar-brand ms-2 me-5" do %>
-        <p class="mb-0 fs-3 logo"><i class="fas fa-fish"></i>Aquarist</p>
-      <% end %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
         <i class="fas fa-bars" style="color: #fff; font-size: 30px;"></i>

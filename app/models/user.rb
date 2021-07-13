@@ -4,10 +4,4 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
 
-def self.guest
-  find_or_create_by(email: "test@com") do |user|
-    user.password = Rails.application.secrets.test_account_path
-  end
-end
-
 end
