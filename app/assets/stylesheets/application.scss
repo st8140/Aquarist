@@ -113,6 +113,13 @@ a.nav-link {
   border-right: 3px solid #4a90e2;
 }
 
+.host-icon {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
 @media screen and ( max-width:992px ) {
   .about-image img {
     margin-bottom: 15px;

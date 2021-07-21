@@ -22,7 +22,11 @@
           <div class="row">
             <label class="col-md-5 user-icon" for="user_image">プロフィール画像</label>
             <div class="col-md-7">
-              <%= image_tag("default_user.png", alt: "user_image", size: "50") %>
+              <% if current_user.persisted? && current_user.user_image? %>
+                <%= image_tag(current_user.user_image.to_s, alt: "user_image", class: "host-icon") %>
+              <% else %>
+                <% image_tag("default_user.png", alt: "user_image", class: "host-icon") %>
+              <% end %>
             </div>
           </div>
         </div>

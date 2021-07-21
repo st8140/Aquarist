@@ -10,7 +10,7 @@
 
         <div class="field mt-5">
           <%= f.label :name %><br />
-          <%= f.email_field :name, autofocus: true, autocomplete: "name", class: "form-control px-2" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control px-2" %>
         </div>
 
         <div class="field">
@@ -21,6 +21,11 @@
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
+        
+        <div class="field">
+          <%= f.label :user_image %><br />
+          <%= f.file_field :user_image, class: "form-control px-2" %>
+        </div>
 
         <div class="field">
           <%= f.label :password %>

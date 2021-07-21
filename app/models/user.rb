@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   has_many :aquaria, dependent: :destroy
+
+  mount_uploader :user_image, UserImageUploader
 end

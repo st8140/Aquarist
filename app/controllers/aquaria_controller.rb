@@ -2,7 +2,7 @@ class AquariaController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @aquaria = Aquaria.find(params[:id])
+
   end
 
   def show
