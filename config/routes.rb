@@ -5,14 +5,16 @@ Rails.application.routes.draw do
   } 
 
   devise_scope :user do
-    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
-    get 'sign_up', :to => 'users/registrations#new'
-    get 'log_in', :to => 'users/sessions#new'
-    get 'log_out', :to => 'users/sessions#destroy'
-    get 'user/:id', :to => 'users/registrations#detail', as: 'detail'
+    get 'user/posts' => 'users/registrations#user_posts', as: 'user_posts'
+    post 'users/guest_sign_in' => 'users/sessions#new_guest'
+    get 'sign_up' => 'users/registrations#new'
+    get 'log_in' => 'users/sessions#new'
+    get 'log_out' => 'users/sessions#destroy'
+    get 'user/:id' => 'users/registrations#detail', as: 'detail'
   end
 
+  root 'home#top'
   get '/' => 'home#top'
-  resources :aquariums
+  resources :aquaria
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

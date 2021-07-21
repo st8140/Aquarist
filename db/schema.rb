@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_11_083940) do
+ActiveRecord::Schema.define(version: 2021_07_21_040420) do
 
-  create_table "aquariums", force: :cascade do |t|
+  create_table "aquaria", force: :cascade do |t|
     t.text "aquarium_introduction"
     t.string "aquarium_image"
     t.integer "user_id"

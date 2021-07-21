@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def forbid_login_user
     if user_signed_in?
-      redirect_to aquariums_path
+      redirect_to aquaria_path
     end
   end
 end

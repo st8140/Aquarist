@@ -1,27 +1,27 @@
-<div class="container device">
-  <div class="device-form">
+<div class="container devise">
+  <div class="devise-form">
     <h2 class="my-4">アカウント登録</h2>
 
-    <div class="device-inner">
+    <div class="devise-inner">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="field form-row mt-5">
-          <%= f.label :名前 %>
-          <%= f.text_field :name, class: "form-control col-10 px-2", autofocus: true, autocomplete: "name" %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control col-10 px-2", autofocus: true, autocomplete: "name", id: "name_field" %>
         </div>
         <div class="field form-row">
-          <%= f.label :メールアドレス %>
-          <%= f.email_field :email, class: "form-control col-10 px-2", autofocus: true, autocomplete: "email" %>
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control col-10 px-2", autofocus: true, autocomplete: "email", id: "email_field" %>
         </div>
         <div class="field form-row">
-          <%= f.label :パスワード %>
+          <%= f.label :password %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> 文字以上)</em>
           <% end %><br />
-          <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "new-password" %>
+          <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "new-password", id: "password_field" %>
         </div>
         <div class="field form-row">
-          <%= f.label :パスワード確認 %>
-          <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "new-password" %>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "new-password", id: "password_confirmation_field" %>
         </div>
         <div class="actions">
           <%= f.submit "アカウント登録", class: "form-control btn-primary mt-5 mb-4" %>

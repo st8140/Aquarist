@@ -24,7 +24,7 @@ class Users::SessionsController < Devise::SessionsController
       # user.confirmed_at = Time.now
     end
     sign_in user
-    redirect_to aquariums_path, notice: "テストユーザーとしてログインしました。"
+    redirect_to aquaria_path, notice: "テストユーザーとしてログインしました。"
   end
   # protected
 

@@ -1,0 +1,61 @@
+<%= provide(:title, "投稿一覧") %>
+<div class="container py-4">
+  <div class="row">
+    <%= render "users_navbar" %>
+    <div class="col-lg-8 bg-color offset-lg-1">
+      <table class="table">
+        <tbody class="posts">
+          <tr>
+            <td class="d-none d-lg-block user-post-pc">
+              <div class="row">
+                <div class="col-lg-8 ms-2">
+                  <span class="time-stamp">
+                    Timestamp
+                  </span>
+                  <p class="introduction pt-1">rokさん、魚の死骸に蟻が数百匹たかってますよ！</p>
+                  <span like><i class="fas fa-heart"></i>0</span>
+                  <div class="comment-count">
+                    <%= link_to "#" do %>
+                      <i class="far fa-comment-dots">0</i>
+                    <% end %>
+                  </div>
+                </div>
+                
+                <div class="col-lg-3">
+                  <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image"), "#" %>
+                </div>
+              </div>
+            </td>
+            
+            <td class="d-lg-none user-post-sp">
+              <p class="time-stamp">
+                Timestamp
+              </p>
+              <p class="introduction">
+                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  <i class="fas fa-caret-down">introduction</i>
+                </button>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  rokさん、魚の死骸に蟻が数百匹たかってますよ！
+                </div>
+              </div>
+              <span like><i class="fas fa-heart"></i>0</span>
+              <div class="comment-count">
+                <%= link_to "#" do %>
+                  <i class="far fa-comment-dots">0</i>
+                <% end %>
+              </div>
+            </td>
+            <td class="d-lg-none">
+              <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image"), "#" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+    

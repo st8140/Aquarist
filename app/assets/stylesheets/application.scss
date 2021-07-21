@@ -136,15 +136,18 @@ a.nav-link {
   margin-right: 20px;
 }
 
-.posts .user-icon {
-  float: left;
-  margin-right: 10px;
-  margin-top: 5px;
-}
+.posts {
+  .user-icon {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  
+  .row {
+    padding: 20px 0;
+  }
+} 
 
-.posts .row {
-  padding: 20px 0;
-}
 
 .time-stamp {
   color: #dcdcdc;
@@ -201,7 +204,7 @@ a.nav-link {
 
 // ------------------------------------------ users_sessions_new ------------------------------------------ //
 
-.device-form h2 {
+.devise-form h2 {
   font-size: 50px;
   margin-bottom: 60px;
   letter-spacing: 3px;
@@ -215,12 +218,12 @@ a.nav-link {
   margin-top: 15px;
 }
 
-.device {
+.devise {
   padding-top: 36px;
   font-size: 16px;
 }
 
-.device-form {
+.devise-form {
   max-width: 600px;
   text-align: center;
   padding: 24px;
@@ -229,13 +232,9 @@ a.nav-link {
   border-radius: 20px;
 }
 
-.device-inner {
+.devise-inner {
   width: 360px;
   margin: 0px auto;
-}
-
-.device a {
-  color: #007bff !important;
 }
 
 .field_with_errors {
@@ -257,19 +256,23 @@ a.nav-link {
 
 a.nav-link.active {
   color: #4a90e2;
+  font-size: 20px;
 }
 
-.user .user-detail-box {
-  max-width: 880px;
-  margin: 30px auto;
+.user {
+  .user-detail-box {
+    max-width: 880px;
+    margin: 30px auto;
+  }
+
+  .update-content {
+    border-bottom: 1px solid #eaedef;
+    padding: 20px;
+    margin: 0 15px;
+    font-size: 16px;
+  }
 }
 
-.user .update-content {
-  border-bottom: 1px solid #eaedef;
-  padding: 20px;
-  margin: 0 15px;
-  font-size: 16px;
-}
 
 .col-md-8.user-detail.bg-color {
   margin: 0 auto;
@@ -278,4 +281,30 @@ a.nav-link.active {
 
 .detail-heading {
   font-size: 30px;
+}
+
+label.col-md-5.user-icon {
+  margin-top: 12px;
+}
+
+@media screen and ( max-width:992px ){
+  .col-md-8.user-detail.bg-color {
+    width: 880px;
+  }
+  
+}
+
+// ------------------------------------------ users_edit ------------------------------------------ //
+
+.account-delete {
+  color: red;
+}
+
+// ------------------------------------------ users_registrations_posts ------------------------------------------ //
+
+td.d-lg-none.user-post-sp {
+  font-size: 20px;
+  position: relative;
+  top: 30px;
+  text-align: initial;
 }

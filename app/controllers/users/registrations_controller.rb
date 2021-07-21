@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def check_guest
     if resource.email == 'test@com'
-      redirect_to root_path, alert: 'ゲストユーザーは削除できません。'
+      redirect_to aquaria_path, alert: 'テストユーザーは削除できません。'
     end
   end
 
@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
+  # def destroys
   #   super
   # end
 
@@ -47,6 +47,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def detail
     @user = User.find_by(id: params[:id])
+  end
+
+  def aquarium
+    
   end
 
   # protected
