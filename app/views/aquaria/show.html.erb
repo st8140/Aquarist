@@ -1,38 +1,26 @@
-<%= provide(:title, "aquariums") %>
+<%= provide(:title, "aquarium-detail") %>
 <div class="main-content my-4">
   <div class="container">
-      <div class="bg-color aquariums-nav-sp d-lg-none">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
+    <div class="bg-color aquariums">
+      <div class="aquariums-image">
+        <% if @aquarium.persisted? && @aquarium.aquarium_image? %>
+          <%= image_tag(@aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image") %>
+        <% else %>
+          <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image") %>
+        <% end %>
       </div>
-      <div class="col-lg-9 bg-color aquariums">
-        <div class="aquariums-image">
-          <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", size: "600", class: "img-fluid img-thumbnail aquarium-image"), "#" %>
+      <div class="row">
+        <div class="col-lg-8 ps-5">
+          <p>いいね！</p> <!-- 後でeachに対応したものに置き換える -->
+          <p>introduction</p> <!-- 後でeachに対応したものに置き換える -->
         </div>
-        <div class="row">
-          <div class="col-lg-8 ps-5">
-            <p>いいね！</p> <!-- 後でeachに対応したものに置き換える -->
-            <p>introduction</p> <!-- 後でeachに対応したものに置き換える -->
+        <div class="col-lg-4 aquariums-user pe-5">
+          <div class="user-icon mb-1">
+            <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "user-icon"), detail_path(@aquarium.user.id), class: "col-lg-1" %>
           </div>
-          <div class="col-lg-4 aquariums-user pe-5">
-            <div class="user-icon mb-1">
-              <%= link_to image_tag("default_user.png", alt: "user-image", size: "60"), "#" %>
-            </div>
-              <p>user.name</p>
-          </div>
+            <p><%= link_to @aquarium.user.name, detail_path(@aquarium.user.id) %></p>
         </div>
       </div>
+    </div>
   </div>
 </div>

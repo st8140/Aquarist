@@ -23,6 +23,7 @@ body {
 
 a {
   text-decoration: none;
+  
 }
 
 a.nav-link {
@@ -86,7 +87,7 @@ a.nav-link {
 
 .bg-color{
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .about-heading {
@@ -144,7 +145,7 @@ a.nav-link {
 }
 
 .posts {
-  .user-icon {
+  .host-icon {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
@@ -314,4 +315,44 @@ td.d-lg-none.user-post-sp {
   position: relative;
   top: 30px;
   text-align: initial;
+}
+
+// ------------------------------------------ new_modal ------------------------------------------ //
+
+.modal-inner {
+  padding: 20px;
+
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  display: initial;
+  text-align: center;
+  border-bottom: initial;
+  padding: initial;
+  
+  h5 {
+    letter-spacing: 1px;
+  }
+
+}
+.close-modal {
+  text-align: end;
+  padding: 10px;
+}
+
+
+.modal-title {
+  font-size: 3em;
+}
+
+.modal-footer {
+  border-top: initial;
+}
+
+label.col-form-label {
+  font-size: 20px;
 }

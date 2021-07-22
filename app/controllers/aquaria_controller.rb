@@ -2,11 +2,12 @@ class AquariaController < ApplicationController
   before_action :authenticate_user!
 
   def index
-
+    @aquarium = Aquarium.new
+    @aquaria = Aquarium.all.order(created_at: :desc)
   end
 
   def show
-
+    @aquarium = Aquarium.find(params[:id])
   end
 
   def new
@@ -19,7 +20,7 @@ class AquariaController < ApplicationController
       flash[:notice] = "アクアリウムを投稿しました"
       redirect_to aquarium_path(@aquarium.id)
     else
-      render new_aquarium
+      render "aquaria/new"
     end
   end
 
