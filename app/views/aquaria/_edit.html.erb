@@ -1,4 +1,4 @@
-<div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-inner">
@@ -6,9 +6,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
+          <h5 class="modal-title" id="exampleModalLabel">投稿編集</h5>
         </div>
-        <%= form_for @aquarium do |f| %>
+        <%= form_for aquarium do |f| %>
           <div class="modal-body">
             <div class="mb-3">
               <%= f.label :aquarium_introduction, "投稿内容", class: "col-form-label", for: "message-text" %>
@@ -21,7 +21,7 @@
               <%= f.hidden_field :user_id, value: current_user.id %>
           </div> 
           <div class="modal-footer">
-          <%= f.submit "投稿する", class: "btn btn-primary mb-3" %>
+          <%= f.submit "更新する", class: "btn btn-primary mb-3" %>
         <% end %>
         </div>
       </div>

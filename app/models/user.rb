@@ -5,8 +5,10 @@ class User < ApplicationRecord
         :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-
   has_many :aquaria, dependent: :destroy
-
   mount_uploader :user_image, UserImageUploader
+
+  def aquaria
+    return Aquarium.where(user_id: self.id)
+  end
 end

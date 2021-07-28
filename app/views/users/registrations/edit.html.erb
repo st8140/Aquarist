@@ -59,8 +59,8 @@
         前の画面に戻る
       <% end %>
       <br>
-      <p class="mt-5 mb-2" id="account-delete">
-        <%= link_to "アカウント削除", registration_path(resource_name), method: :delete, class: "account-delete" %>
+      <p class="mt-5 mb-2">
+        <%= link_to "アカウント削除", registration_path(resource_name), :data => {:confirm => '本当に削除しますか?'}, method: :delete, class: "account-delete" %>
       </p>
     </div>
   </div>

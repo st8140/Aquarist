@@ -5,12 +5,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   before_action :check_guest, only: :destroy
 
+
   def check_guest
     if resource.email == 'test@com'
       redirect_to aquaria_path, alert: 'テストユーザーは削除できません。'
     end
   end
 
+  def user_posts
+    @user = User.find_by(id: params[:id]) 
+    @aquarium = Aquarium.new
+  end
   # GET /resource/sign_up
   # def new
   #   super
@@ -49,10 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.find_by(id: params[:id])
   end
 
-  def aquarium
-    
-  end
-
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -67,7 +68,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    "/user/#{current_user.id}"
+    "/users/#{current_user.id}"
+  end
+
+  def after_update_path_for(resource)
+    "/users/#{current_user.id}"
   end
 
   # The path used after sign up for inactive accounts.

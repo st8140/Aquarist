@@ -1,32 +1,26 @@
 <div class="col-lg-2 sidebar bg-color p-4 d-none d-lg-block">
   <ul class="nav flex-column" id="user-nav-pc">
     <li class="nav-item">
-      <%= link_to "アカウント", detail_path(current_user.id), class: "nav-link" %>
+      <%= link_to "アカウント", detail_path(@user.id), class: "nav-link" %>
     </li>
     <li class="nav-item">
       <%= link_to "投稿一覧", user_posts_path, class: "nav-link" %>
     </li>
     <li class="nav-item">
       <%= link_to "いいね！", "#", class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "新規投稿", "#", class: "nav-link" %>
     </li>
   </ul>
 </div>
-<div class="col-lg-2 bg-color d-lg-none aquariums-nav-sp">
+<div class="col-lg-2 bg-color d-lg-none nav-sp">
   <ul class="nav nav-pills" id="user-nav-sp">
     <li class="nav-item">
-      <%= link_to "アカウント", detail_path(current_user.id), class: "nav-link active" %>
+      <%= link_to "アカウント", detail_path(@user.id), class: "nav-link active" %>
     </li>
     <li class="nav-item">
       <%= link_to "投稿一覧", user_posts_path, class: "nav-link" %>
     </li>
     <li class="nav-item">
       <%= link_to "いいね！", "#", class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "新規投稿", "#", class: "nav-link" %>
     </li>
   </ul>
 </div>

@@ -23,7 +23,6 @@ body {
 
 a {
   text-decoration: none;
-  
 }
 
 a.nav-link {
@@ -127,16 +126,8 @@ a.nav-link {
   }
 }
 
-// ------------------------------------------ aquariums_index ------------------------------------------ //
+// ------------------------------------------ navbar------------------------------------------ //
 
-.aquariums-image {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
 
 .sidebar {
   height: 80vh;
@@ -144,72 +135,190 @@ a.nav-link {
   margin-right: 20px;
 }
 
-.posts {
-  .host-icon {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-  }
-  
-  .row {
-    padding: 20px 0;
-  }
-} 
-
-
-.time-stamp {
-  color: #dcdcdc;
+.navbar {
+  z-index: 100;
 }
 
-.introduction {
-  margin: 20px 0;
-}
-
-.p-4.bg-color {
-  max-width: 80%;
-}
-
-.comment-count {
-  display: inline-block;
-  margin-left: 10px;
+.nav-account-item {
+  color: #fff;
+  font-weight: bold;
 }
 
 @media screen and ( max-width:992px ) {
-  .aquariums {
-    margin-left: initial;
+  
+  .nav-sp {
     margin-bottom: 15px;
   }
 
-  .aquariums-nav-sp {
-    margin-bottom: 15px;
-  }
+}
 
-  .p-4.bg-color {
-    max-width: 100%;
-  }
+// ------------------------------------------ aquaria_index ------------------------------------------ //
 
-  td.d-lg-none {
-    text-align: center;
-  }
+  // ------------------------------------------ _posts ------------------------------------------ //
 
-  .posts .user-icon {
-    float: initial;
-    margin-right: initial;
-  }
+  .posts {
+    .host-icon {
+      float: left;
+      margin-right: 10px;
+      margin-top: 5px;
+    }
+    
+    .row {
+      padding: 20px 0;
+    }
+  } 
 
-  .user-name {
-    margin-bottom: -20px;
+  .time-stamp {
+    color: #dcdcdc;
   }
 
   .introduction {
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
 
-  .time-stamp {
-    margin-bottom: 20px;
+  .p-4.bg-color {
+    max-width: 80%;
+  }
+
+  .comment-count {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .like-comment {
+    position: relative;
+    top: 70px;
+  }
+
+  .posts-sp-box:nth-child(n + 1) {
+    margin-top: 10px;
+    border-bottom: 1px solid  #dcdcdc;
+    padding: 20px;
+  }
+
+  @media screen and ( max-width:992px ) {
+    
+    .posts-table:nth-child(n + 1) {
+      margin-top: 10px;
+    }
+    
+    .p-4.bg-color {
+      max-width: 100%;
+    }
+    
+    td.d-lg-none {
+      text-align: center;
+    }
+    
+    .posts .user-icon {
+      float: initial;
+      margin-right: initial;
+    }
+    
+    .user-name {
+      margin-bottom: -20px;
+    }
+    
+    .introduction {
+      margin-bottom: 20px;
+    }
+    
+    .time-stamp {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and ( max-width:768px ) {
+    
+    .col-sm-6.ms-3 {
+      margin-left: 30px !important;
+    }
+    
+    .comment-count {
+      margin-left: 5px;
+    }
+    
+  }
+
+// ------------------------------------------ aquaria_show ------------------------------------------ //
+
+.user-name {
+  color: #222;
+}
+
+.col-lg-4.text-end {
+  position: relative;
+  left: 100px;
+  font-size: 30px;
+}
+
+.show-box {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.aquaria-image {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  padding: 20px;
+}
+
+.like-user-list {
+  font-size: 14px;
+  padding-left: 1rem;
+}
+
+.likes {
+  text-align: end;
+}
+
+.like {
+  position: relative;
+  left: -50px;
+}
+
+.comment-list {
+  border-bottom: 1px solid  #dcdcdc;
+  display: table-cell;
+}
+
+.comment-table {
+  display: table;
+}
+
+.btn-circle {
+  display: inline-block;
+  text-decoration: none;
+  background: #0D6EFD;
+  color: #FFF;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+  position: fixed;
+  right: 80px;
+  bottom: 270px;
+
+  &:hover {
+    background: #668ad8;
   }
 }
 
+
+@media screen and( max-width:576px ) {
+  .col-lg-4.text-end {
+    position: relative;
+    left: -70px;
+  }
+}
 // ------------------------------------------ users_sessions_new ------------------------------------------ //
 
 .devise-form h2 {
@@ -308,13 +417,28 @@ label.col-md-5.user-icon {
   color: red;
 }
 
-// ------------------------------------------ users_registrations_posts ------------------------------------------ //
+// ------------------------------------------ users_registrations_user_posts ------------------------------------------ //
 
 td.d-lg-none.user-post-sp {
   font-size: 20px;
   position: relative;
   top: 30px;
   text-align: initial;
+}
+
+.user-posts-heading {
+  font-size: 30px;
+  text-align: center;
+  padding: 20px 20px 30px 20px;
+  border-bottom: 1px solid #eaedef;
+}
+
+.user-posts {
+  margin: 0 auto;
+}
+
+.user-posts-box {
+margin: 30px auto;
 }
 
 // ------------------------------------------ new_modal ------------------------------------------ //

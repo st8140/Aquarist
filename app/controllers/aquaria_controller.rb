@@ -18,22 +18,31 @@ class AquariaController < ApplicationController
     @aquarium = Aquarium.new(aquarium_params)
     if @aquarium.save
       flash[:notice] = "アクアリウムを投稿しました"
-      redirect_to aquarium_path(@aquarium.id)
+      redirect_to aquaria_path
     else
       render "aquaria/new"
     end
   end
 
   def edit
-
+    @aquarium = Aquarium.find(params[:id])
   end
 
   def update
-
+    @aquarium = Aquarium.find(params[:id])
+    if @aquarium.update(aquarium_params)
+      flash[:notice] = "投稿を更新しました"
+      redirect_to aquarium_path(@aquarium)
+    else
+      render edit_aquarium_path(@aquarium)
+    end
   end
 
   def destroy
-
+    @aquarium = Aquarium.find(params[:id])
+    @aquarium.destroy
+    flash[:notice] = "投稿を削除しました"
+    redirect_to aquaria_path
   end
 
 private

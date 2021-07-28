@@ -26,19 +26,4 @@ $(document).on('turbolinks:load', function(){
       }
   });
 });
-// ------------------------------------------ alert ------------------------------------------ //
-
-document.addEventListener('DOMContentLoaded', function() {
-  var deleteAlert = document.getElementById('account-delete');
-  if (!deleteAlert){ return false;}
-  deleteAlert.addEventListener('click', function() {
-      var result = window.confirm('アカウントを削除しますか？');
-      if( result ) {
-        window.confirm('本当に削除しますか？')
-      } else {
-        window.confirm("キャンセルしました。")
-      }
-    });
-});
-
 

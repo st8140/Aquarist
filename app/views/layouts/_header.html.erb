@@ -13,24 +13,32 @@
           <li class="nav-item">
             <%= link_to "Shop search", "#", class: "nav-link me-4" %>
           </li>
-          <li class="nav-item dropdown" id="current_user">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <% if current_user.persisted? && current_user.user_image? %>
-                <%= image_tag(current_user.user_image.to_s, alt: "user_image", class: "host-icon") %>
-              <% else %>
-                <%= image_tag("default_user.png", alt: "user_icon", class: "host-icon") %>
-              <% end %>
-              <%= current_user.name %>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><%= link_to "アカウント", detail_path(current_user.id), class: "dropdown-item" %></li>
-              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-            </ul>
-          </li>
+          <div class="d-lg-block d-none">
+            <li class="nav-item dropdown" id="current_user">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <% if current_user.persisted? && current_user.user_image? %>
+                  <%= image_tag(current_user.user_image.to_s, alt: "user_image", class: "host-icon") %>
+                <% else %>
+                  <%= image_tag("default_user.png", alt: "user_icon", class: "host-icon") %>
+                <% end %>
+                <%= current_user.name %>
+              </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><%= link_to "アカウント", detail_path(current_user.id), class: "dropdown-item" %></li>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                </ul>
+            </li>
+          </div>
+          <div class="d-lg-none">
+            <li class="nav-item mb-2"><%= link_to "アカウント", detail_path(current_user.id), class: "nav-account-item" %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :deletes, class: "nav-account-item" %></li>
+          </div>
         </ul>
       </div>
     <% else %>
-      <%= link_to "Aquaristとは?", "#about", class: "navbar-brand d-none d-lg-block" %>
+      <% if current_page?("/") %>
+        <%= link_to "Aquaristとは?", "#about", class: "navbar-brand d-none d-lg-block" %>
+      <% end %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
         <i class="fas fa-bars" style="color: #fff; font-size: 30px;"></i>
