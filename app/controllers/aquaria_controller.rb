@@ -16,12 +16,25 @@ class AquariaController < ApplicationController
 
   def create
     @aquarium = Aquarium.new(aquarium_params)
-    if @aquarium.save
-      flash[:notice] = "アクアリウムを投稿しました"
-      redirect_to aquaria_path
-    else
-      render "aquaria/new"
-    end
+
+    respond_to do |format|
+      if @aquarium.save
+        flash[:notice] = "アクアリウムを投稿しました"
+        format.html { redirect_to @aquarium }
+        format.js { render js: "window.location = '#{aquarium_path(@aquarium)}' " }
+      else
+        @aquarium.errors.each do |name, msg|
+          flash.now[name] = msg
+        end
+        format.html { redirect_to @aquarium }
+        format.js { @status = "fail" }
+      end
+
+    end 
+    #   redirect_to aquaria_path
+    # else
+    #   render "aquaria/index"
+    # end
   end
 
   def edit

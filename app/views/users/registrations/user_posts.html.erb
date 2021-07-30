@@ -1,12 +1,12 @@
 <%= provide(:title, "user-posts") %>
-<%= render "aquaria/new" %>
+<div class="modal fade" id="new-modal" tabindex="-1" aria-hidden="true", role="dialog"></div>
 
 <div class="container user py-4">
   <div class="row">
     <%= render "users_navbar" %>
 
     <div class="col-lg-9 bg-color user-posts">
-      <%= link_to "新規投稿", "#", class: "btn-circle", "data-bs-toggle": :"modal", "data-bs-target": :"#newModal" %>
+      <%= link_to "新規投稿", new_aquarium_path, class: "btn-circle", remote: true %>
       <div class="user-posts-box">
         <table class="table">
           <tbody class="posts">

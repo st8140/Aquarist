@@ -1,19 +1,7 @@
 ja:
   activerecord:
     models:
-      user: ユーザー
-      aquarium: アクアリウム
-    attributes:
-      user:
-        name: 名前
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: パスワード確認
-        introduction: 自己紹介
-      
-      aquarium:
-        aquarium_introduction: 投稿内容
-        aquarium_image: アクアリウム画像
+      aquarium: "アクアリウム"
 
     attributes:
       created_at: 作成日
@@ -59,3 +47,4 @@ ja:
         one: 1年
         other: "%{count}年"
 
+        
