@@ -32,8 +32,6 @@ gem 'devise'
 gem 'uglifier'
 gem 'bootstrap'
 gem 'jquery-rails'
-gem 'carrierwave'
-gem 'haml-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,7 +60,6 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  gem 'poltergeist'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

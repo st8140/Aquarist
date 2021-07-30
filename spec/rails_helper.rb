@@ -7,8 +7,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
-require 'selenium-webdriver'
 
+require 'selenium-webdriver'
 
 Capybara.register_driver :sp_driver do |app|
   useragent = "sp"
@@ -73,5 +73,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.include FactoryBot::Syntax::Methods
 end

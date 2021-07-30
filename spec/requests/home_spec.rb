@@ -4,7 +4,7 @@ RSpec.describe "Home", type: :request do
   describe "GET home#top" do
 
     before do
-      get "/"
+      get root_path
     end
 
     it "正常なレスポンスが返ってくること" do
@@ -12,7 +12,7 @@ RSpec.describe "Home", type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it "topが正しく表示されること" do
+    it "viewが正しく表示されること" do
       expect(response).to render_template :top
     end
   end

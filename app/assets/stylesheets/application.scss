@@ -21,26 +21,6 @@ body {
   background-color: #e0ffff;; 
 }
 
-a {
-  text-decoration: none;
-}
-
-a.nav-link {
-  color: #222;
-  font-weight: bold;
-}
-
-.flash {
-  color: white;
-  text-align: center;
-  &__alert{
-    background-color: red;
-  }
-  &__notice {
-    background-color: blue;
-  }
-}
-
 // ------------------------------------------ top ------------------------------------------ //
 
 .cover {
@@ -51,15 +31,6 @@ a.nav-link {
   background-blend-mode: lighten;
 }
 
-.top-text {
-  position: relative;
-  top: 280px;
-}
-
-.nav-user-name {
-  color: #fff;
-}
-
 .navbar-light .navbar-nav .nav-link:hover{
   color: #FFFF00;
   }
@@ -68,419 +39,53 @@ a.nav-link {
   color: #FFF;
   }
 
-.navbar-light .navbar-brand:hover {
-  color: #FFFF00;
-}
-
-.navbar-light .navbar-brand {
-  color: #FFF;
-}
-
-.top-text-logo {
-  font-size: 100px;
-}
-
-.navbar-light .navbar-toggler{
-  border-color: #fff;
-}
-
-.bg-color{
-  background-color: #fff;
-  border-radius: 10px;
-}
-
-.about-heading {
-  border-bottom: 1px solid #0d6efd;
-  color: #0d6efd;
-  font-size: 50px;
-  letter-spacing: 3px;
-}
-
-.about-sub-heading {
-  font-weight: bold;
-}
-
-.about-text {
-  line-height: 50px;
-  font-weight: bold;
-}
-
-.about-image img{
-  border-radius: 50px;
-}
-
-.active {
-  border-right: 3px solid #4a90e2;
-}
-
-.host-icon {
-  width: 65px;
-  height: 65px;
-  object-fit: cover;
-  border-radius: 50px;
-}
-
-@media screen and ( max-width:992px ) {
-  .about-image img {
-    margin-bottom: 15px;
-  }
-}
-
-// ------------------------------------------ navbar------------------------------------------ //
-
-
-.sidebar {
-  height: 80vh;
-  margin-left: 10px;
-  margin-right: 20px;
-}
-
-.navbar {
-  z-index: 100;
-}
-
-.nav-account-item {
-  color: #fff;
-  font-weight: bold;
-}
-
-@media screen and ( max-width:992px ) {
-  
-  .nav-sp {
-    margin-bottom: 15px;
+  .navbar-light .navbar-brand:hover {
+    color: #FFFF00;
   }
 
-}
-
-// ------------------------------------------ aquaria_index ------------------------------------------ //
-
-  // ------------------------------------------ _posts ------------------------------------------ //
-
-  .posts {
-    .host-icon {
-      float: left;
-      margin-right: 10px;
-      margin-top: 5px;
-    }
-    
-    .row {
-      padding: 20px 0;
-    }
-  } 
-
-  .time-stamp {
-    color: #dcdcdc;
+  .navbar-light .navbar-brand {
+    color: #FFF;
   }
 
-  .introduction {
-    margin: 20px 0;
+  .top-text {
+    margin-top: 220px;
   }
 
-  .p-4.bg-color {
-    max-width: 80%;
+  .top-text-logo {
+    font-size: 100px;
   }
 
-  .comment-count {
-    display: inline-block;
-    margin-left: 10px;
+  .navbar-light .navbar-toggler{
+    border-color: #fff;
   }
 
-  .like-comment {
-    position: relative;
-    top: 70px;
+  #about {
+    background-color: #fff;
+    border-radius: 20px;
   }
 
-  .posts-sp-box:nth-child(n + 1) {
-    margin-top: 10px;
-    border-bottom: 1px solid  #dcdcdc;
-    padding: 20px;
+  .about-heading {
+    border-bottom: 1px solid #0d6efd;
+    color: #0d6efd;
+    font-size: 50px;
+    letter-spacing: 3px;
+  }
+
+  .about-sub-heading {
+    font-weight: bold;
+  }
+
+  .about-text {
+    line-height: 50px;
+    font-weight: bold;
+  }
+
+  .about-image img{
+    border-radius: 50px;
   }
 
   @media screen and ( max-width:992px ) {
-    
-    .posts-table:nth-child(n + 1) {
-      margin-top: 10px;
-    }
-    
-    .p-4.bg-color {
-      max-width: 100%;
-    }
-    
-    td.d-lg-none {
-      text-align: center;
-    }
-    
-    .posts .user-icon {
-      float: initial;
-      margin-right: initial;
-    }
-    
-    .user-name {
-      margin-bottom: -20px;
-    }
-    
-    .introduction {
-      margin-bottom: 20px;
-    }
-    
-    .time-stamp {
-      margin-bottom: 20px;
+    .about-image img {
+      margin-bottom: 15px;
     }
   }
-
-  @media screen and ( max-width:768px ) {
-    
-    .col-sm-6.ms-3 {
-      margin-left: 30px !important;
-    }
-    
-    .comment-count {
-      margin-left: 5px;
-    }
-    
-  }
-
-// ------------------------------------------ aquaria_show ------------------------------------------ //
-
-.user-name {
-  color: #222;
-}
-
-.col-lg-4.text-end {
-  position: relative;
-  left: 100px;
-  font-size: 30px;
-}
-
-.show-box {
-  max-width: 880px;
-  margin: 0 auto;
-}
-
-.aquaria-image {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-  padding: 20px;
-}
-
-.like-user-list {
-  font-size: 14px;
-  padding-left: 1rem;
-}
-
-.likes {
-  text-align: end;
-}
-
-.like {
-  position: relative;
-  left: -50px;
-}
-
-.comment-list {
-  border-bottom: 1px solid  #dcdcdc;
-  display: table-cell;
-}
-
-.comment-table {
-  display: table;
-}
-
-.btn-circle {
-  display: inline-block;
-  text-decoration: none;
-  background: #0D6EFD;
-  color: #FFF;
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
-  border-radius: 50%;
-  text-align: center;
-  overflow: hidden;
-  transition: .4s;
-  position: fixed;
-  right: 80px;
-  bottom: 270px;
-
-  &:hover {
-    background: #668ad8;
-  }
-}
-
-
-@media screen and( max-width:576px ) {
-  .col-lg-4.text-end {
-    position: relative;
-    left: -70px;
-  }
-}
-// ------------------------------------------ users_sessions_new ------------------------------------------ //
-
-.devise-form h2 {
-  font-size: 50px;
-  margin-bottom: 60px;
-  letter-spacing: 3px;
-}
-
-.field {
-  margin-top: 15px;
-}
-
-.actions {
-  margin-top: 15px;
-}
-
-.devise {
-  padding-top: 36px;
-  font-size: 16px;
-}
-
-.devise-form {
-  max-width: 600px;
-  text-align: center;
-  padding: 24px;
-  margin: 0px auto;
-  background-color: white;
-  border-radius: 20px;
-}
-
-.devise-inner {
-  width: 360px;
-  margin: 0px auto;
-}
-
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-.remenber-me {
-  margin-bottom: -5px;
-} 
-
-.test-user-login a {
-  color: #fff !important;
-}
-
-// ------------------------------------------ users_registrations_detail ------------------------------------------ //
-
-
-a.nav-link.active {
-  color: #4a90e2;
-  font-size: 20px;
-}
-
-.user {
-  .user-detail-box {
-    max-width: 880px;
-    margin: 30px auto;
-  }
-
-  .update-content {
-    border-bottom: 1px solid #eaedef;
-    padding: 20px;
-    margin: 0 15px;
-    font-size: 16px;
-  }
-}
-
-
-.col-md-8.user-detail.bg-color {
-  margin: 0 auto;
-  text-align: center;
-}
-
-.detail-heading {
-  font-size: 30px;
-}
-
-label.col-md-5.user-icon {
-  margin-top: 12px;
-}
-
-@media screen and ( max-width:992px ){
-  .col-md-8.user-detail.bg-color {
-    width: 880px;
-  }
-  
-}
-
-// ------------------------------------------ users_edit ------------------------------------------ //
-
-.account-delete {
-  color: red;
-}
-
-// ------------------------------------------ users_registrations_user_posts ------------------------------------------ //
-
-td.d-lg-none.user-post-sp {
-  font-size: 20px;
-  position: relative;
-  top: 30px;
-  text-align: initial;
-}
-
-.user-posts-heading {
-  font-size: 30px;
-  text-align: center;
-  padding: 20px 20px 30px 20px;
-  border-bottom: 1px solid #eaedef;
-}
-
-.user-posts {
-  margin: 0 auto;
-}
-
-.user-posts-box {
-margin: 30px auto;
-}
-
-// ------------------------------------------ new_modal ------------------------------------------ //
-
-.modal-inner {
-  padding: 20px;
-
-}
-
-.modal-content {
-  border-radius: 10px;
-}
-
-.modal-header {
-  display: initial;
-  text-align: center;
-  border-bottom: initial;
-  padding: initial;
-  
-  h5 {
-    letter-spacing: 1px;
-  }
-
-}
-.close-modal {
-  text-align: end;
-  padding: 10px;
-}
-
-
-.modal-title {
-  font-size: 3em;
-}
-
-.modal-footer {
-  border-top: initial;
-}
-
-label.col-form-label {
-  font-size: 20px;
-}
-
-#new-modal-error {
-  color: red;
-}
