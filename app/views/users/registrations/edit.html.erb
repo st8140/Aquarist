@@ -1,0 +1,67 @@
+<%= provide(:title, "user_edit") %>
+
+<div class="container devise">
+  <div class="devise-form">
+    <h2 class="my-4">アカウント編集</h2>
+
+    <div class="devise-inner">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+
+        <div class="field mt-5">
+          <%= f.label :name %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control px-2" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control px-2" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        
+        <div class="field">
+          <%= f.label :user_image %><br />
+          <%= f.file_field :user_image, class: "form-control px-2" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <i>
+            ( <% if @minimum_password_length %>
+              <em><%= @minimum_password_length %> 文字以内</em>
+              <% end %>)
+          </i><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control px-2" %>
+          <p>*変更する場合のみ入力</p>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control px-2" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password %> 
+          <br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control px-2" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "更新", class: "form-control btn-primary mt-5 mb-4" %>
+        </div>
+      <% end %>
+
+      <%= link_to detail_path(current_user.id) do %>
+        <i class="fas fa-undo-alt"></i>
+        前の画面に戻る
+      <% end %>
+      <br>
+      <p class="mt-5 mb-2">
+        <%= link_to "アカウント削除", registration_path(resource_name), :data => {:confirm => '本当に削除しますか?'}, method: :delete, class: "account-delete" %>
+      </p>
+    </div>
+  </div>
+</div>

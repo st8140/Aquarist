@@ -10,23 +10,16 @@
     <%= stylesheet_link_tag 'https://use.fontawesome.com/releases/v5.6.1/css/all.css', rel: 'stylesheet' %>
     <%= stylesheet_link_tag  'reboot.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <!-- slick -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <!-- javascript -->
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <div class="main-wrapper">
-    <% unless current_page?("/") %>
+    <main class="main-wrapper">
       <%= render "layouts/header" %>
-    <% end%>
+      <%= render "layouts/flash" %>
       <%= yield %>
       <%= render "layouts/footer" %>
-    </div>
-  <!-- slick -->
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    </main>
   </body>
 </html>

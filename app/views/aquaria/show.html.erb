@@ -1,0 +1,54 @@
+<%= provide(:title, "aquarium-detail") %>
+<%= render partial: "edit", locals: { aquarium: @aquarium } %>
+
+<div class="main-content my-4">
+  <div class="container">
+    <div class="bg-color show-box">
+      <div class="bg-dark">
+        <div class="aquaria-image mb-4">
+          <% if @aquarium.persisted? && @aquarium.aquarium_image? %>
+            <%= image_tag(@aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image") %>
+          <% else %>
+            <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image") %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row p-4 ms-1">
+        <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+        <div class="col-lg-7 col-sm-6 ms-5">
+          <span>
+            <%= link_to @aquarium.user.name, detail_path(@aquarium.user.id),  class: "user-name" %>
+          </span>
+          <br>
+          <p class="time-stamp">
+            <%= "#{time_ago_in_words(@aquarium.created_at)}前に投稿" %>
+          </p>
+          <p class="introduction pt-2">
+            <%= @aquarium.aquarium_introduction %>
+          </p>
+          <div class="row">
+            <div class="col-lg-8">
+              <span like><i class="fas fa-heart"></i> 0</span>
+              <span class="like-user-list">
+                <%= link_to "いいねしたユーザー", "#" %>
+              </span>
+            </div>
+            <% if @aquarium.user.id == current_user.id%>
+              <div class="col-lg-4 text-end">
+                <%= link_to "#", class: "me-2 text-success", "data-bs-toggle": :"modal", "data-bs-target": :"#editModal" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+                <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger" do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="container comment-table">
+      </div>
+    </div>
+  </div>
+</div>

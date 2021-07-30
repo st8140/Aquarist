@@ -1,0 +1,58 @@
+<table class="table">
+  <tbody class="posts">
+    <tr class="posts-table">
+      <td class="d-none d-lg-block">
+        <div class="row">
+          <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+          <div class="col-lg-7 col-sm-6 ms-2">
+            <span>
+              <%= link_to aquarium.user.name, "/users/#{aquarium.user.id}", class: "user-name" %>
+            </span>
+            <br>
+            <p class="time-stamp">
+              <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
+            </p>
+            <div class="comment-list">
+              <p>いいですね〜！</p>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <div class="comment-form">
+    <!-- comment対応のものに置き換える
+      <%= form_for aquarium do |f| %> 
+        <%= f.label "コメントを入力", class: "col-form-label" %><br>
+        <%= f.text_area :title, class: "form-controll" %>
+      <% end %>
+    -->
+    </div>
+
+      <div class="d-lg-none">
+        <div class="row">
+          <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-sm-1" %>
+          <div class="col-sm-6 ms-3">
+            <p class="user-name">
+              <%= link_to aquarium.user.name, detail_path(aquarium.user.id) %>
+            </p>
+            <br>
+            <p class="time-stamp">
+              <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
+            </p>
+            <div class="comment-list">
+              <p>いいですね〜！</p>
+            </div>
+          </div>
+        </div>
+        <div class="comment-form">
+          <!-- comment対応のものに置き換える
+            <%= form_for aquarium do |f| %> 
+              <%= f.label "コメントを入力", class: "col-form-label" %><br>
+              <%= f.text_area :title, class: "form-controll" %>
+            <% end %>
+          -->
+        </div>
+      </div>
+    <% end %>
+  </tbody>
+</table>
