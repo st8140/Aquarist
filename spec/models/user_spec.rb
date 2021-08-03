@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  it "有効なファクトリーを持つこと" do
+  it "名前、メールアドレス、パスワードがあれば有効であること" do
     expect(@user).to be_valid
   end
 
