@@ -31,7 +31,6 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'uglifier'
 gem 'bootstrap'
-gem 'jquery-rails'
 gem 'carrierwave', '~> 2.2.1'
 gem 'haml-rails'
 
