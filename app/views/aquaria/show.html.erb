@@ -1,5 +1,5 @@
 <%= provide(:title, "aquarium-detail") %>
-<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true", role="dialog"></div>
+<%= render partial: "edit", locals: { aquarium: @aquarium } %>
 
 <div class="main-content my-4">
   <div class="container">
@@ -36,7 +36,7 @@
             </div>
             <% if @aquarium.user.id == current_user.id%>
               <div class="col-lg-4 text-end">
-                <%= link_to edit_aquarium_path, remote: true, class: "me-2 text-success", id: "edit-button" do %>
+                <%= link_to "#", class: "me-2 text-success", "data-bs-toggle": :"modal", "data-bs-target": :"#editModal" do %>
                   <i class="fas fa-edit"></i>
                 <% end %>
                 <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger" do %>

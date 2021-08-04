@@ -11,8 +11,8 @@
       <%= form_with model: @aquarium, remote: true do |f| %>
         <div class="modal-body">
           <div class="mb-3">
-            <%= f.label :aquarium_introduction, class: "col-form-label" %>
-            <%= f.text_area :aquarium_introduction, class: "form-control", size: "30x5", placeholder: "ここに投稿内容を入力します" %>
+            <%= f.label :aquarium_introduction, class: "col-form-label", for: "message-text" %>
+            <%= f.text_area :aquarium_introduction, class: "form-control", id: "message-text", size: "30x5" %>
           </div>
           <div class="mb-3">
             <%= f.label :aquarium_image, class: "col-form-label" %>

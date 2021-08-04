@@ -23,10 +23,18 @@ class AquariaController < ApplicationController
         format.html { redirect_to @aquarium }
         format.js { render js: "window.location = '#{aquarium_path(@aquarium)}' " }
       else
+        @aquarium.errors.each do |name, msg|
+          flash.now[name] = msg
+        end
         format.html { redirect_to @aquarium }
         format.js { @status = "fail" }
       end
+
     end 
+    #   redirect_to aquaria_path
+    # else
+    #   render "aquaria/index"
+    # end
   end
 
   def edit
@@ -35,17 +43,12 @@ class AquariaController < ApplicationController
 
   def update
     @aquarium = Aquarium.find(params[:id])
-
-    respond_to do |format|
-      if @aquarium.update(aquarium_params)
-        flash[:notice] = "投稿を更新しました"
-        format.html { redirect_to @aquarium }
-        format.js { render js: "window.location = '#{aquarium_path(@aquarium)}' " }
-      else
-        format.html { redirect_to @aquarium }
-        format.js { @status = "fail" }
-      end
-    end 
+    if @aquarium.update(aquarium_params)
+      flash[:notice] = "投稿を更新しました"
+      redirect_to aquarium_path(@aquarium)
+    else
+      render edit_aquarium_path(@aquarium)
+    end
   end
 
   def destroy
