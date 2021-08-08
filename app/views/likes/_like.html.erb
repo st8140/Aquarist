@@ -1,0 +1,10 @@
+<% if current_user.already_liked?(aquarium) %>
+  <%= link_to aquarium_likes_path(aquarium), method: "delete", remote: true do %>
+    <span class="fas fa-heart like-btn"></span>
+  <% end %>
+<% else %>
+  <%= link_to aquarium_likes_path(aquarium), method: "post", remote: true do %>
+    <span class="fas fa-heart unlike-btn"></span>
+  <% end %>
+<% end %>
+<%= aquarium.likes.count %>

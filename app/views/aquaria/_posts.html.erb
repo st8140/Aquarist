@@ -15,7 +15,10 @@
             <p class="introduction pt-2">
               <%= aquarium.aquarium_introduction %>
             </p>
-            <span like><i class="fas fa-heart"></i>0</span>
+            <div class="likes-buttons" id="likesButtons-<%= aquarium.id %>">
+              <%= render partial: "likes/like", locals: { aquarium: aquarium } %>
+            </div>
+
             <div class="comment-count">
               <%= link_to "#" do %>
                 <i class="far fa-comment-dots">0</i>
@@ -44,19 +47,25 @@
             </p>
             <br>
             <p class="time-stamp">
-              <%= aquarium.created_at %>
-            </p>
-            <p class="introduction">
-              <%= aquarium.aquarium_introduction %>
+              <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
             </p>
           </div>
-          <div class="col-sm-2 like-comment">
-            <span like><i class="fas fa-heart"></i>0</span>
+          <div class="col-sm-4 like-comment">
+            <div class="likes-buttons" id="likesButtons-sp-<%= aquarium.id %>">
+              <%= render partial: "likes/like", locals: {aquarium: aquarium} %>
+            </div>
+
             <div class="comment-count">
               <%= link_to "#" do %>
                 <i class="far fa-comment-dots">0</i>
               <% end %>
             </div>
+          </div>
+
+          <div class="col">
+            <p class="introduction">
+              <%= aquarium.aquarium_introduction %>
+            </p>
           </div>
           <% if aquarium.persisted? && aquarium.aquarium_image? %>
             <%= link_to image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>

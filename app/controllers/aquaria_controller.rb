@@ -4,10 +4,13 @@ class AquariaController < ApplicationController
   def index
     @aquarium = Aquarium.new
     @aquaria = Aquarium.all.order(created_at: :desc)
+    @like = Like.new
   end
-
+  
   def show
     @aquarium = Aquarium.find(params[:id])
+    @like = Like.new
+    @liked_users = @aquarium.liked_users
   end
 
   def new
