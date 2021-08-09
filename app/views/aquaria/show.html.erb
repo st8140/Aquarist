@@ -1,5 +1,6 @@
-<%= provide(:title, "aquarium-detail") %>
+<%= provide(:title, "投稿詳細ページ") %>
 <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true", role="dialog"></div>
+<%= render partial: "likes/like_modal", locals: { liked_users: @liked_users } %>
 
 <div class="main-content my-4">
   <div class="container">
@@ -15,7 +16,7 @@
       </div>
 
       <div class="row p-4 ms-1">
-        <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+        <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
         <div class="col-lg-7 col-sm-6 ms-5">
           <span>
             <%= link_to @aquarium.user.name, detail_path(@aquarium.user.id),  class: "user-name" %>
@@ -29,17 +30,30 @@
           </p>
           <div class="row">
             <div class="col-lg-8">
-              <span like><i class="fas fa-heart"></i> 0</span>
-              <span class="like-user-list">
-                <%= link_to "いいねしたユーザー", "#" %>
-              </span>
+              <% if current_user.already_liked?(@aquarium) %>
+                <%= link_to aquarium_likes_path(@aquarium), method: "delete" do %>
+                  <span class="fas fa-heart like-btn"></span>
+                <% end %>
+              <% else %>
+                <%= link_to aquarium_likes_path(@aquarium), method: "post" do %>
+                  <span class="fas fa-heart unlike-btn"></span>
+                <% end %>
+              <% end %>
+              <span class="likes-count"><%= @aquarium.likes.count %></span>
+
+              <% if @aquarium.likes.count > 0 %>
+                <span class="like-user">
+                  <%= link_to "いいねしたユーザー", "#", "data-bs-toggle": :"modal", "role": :"button", "data-bs-target": :"#likeModal" %>
+                </span>
+              <% end %>
             </div>
+
             <% if @aquarium.user.id == current_user.id%>
               <div class="col-lg-4 text-end">
                 <%= link_to edit_aquarium_path, remote: true, class: "me-2 text-success", id: "edit-button" do %>
                   <i class="fas fa-edit"></i>
                 <% end %>
-                <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger" do %>
+                <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger", id: "delete-button" do %>
                   <i class="fas fa-trash-alt"></i>
                 <% end %>
               </div>

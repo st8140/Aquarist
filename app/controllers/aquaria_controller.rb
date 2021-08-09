@@ -4,10 +4,13 @@ class AquariaController < ApplicationController
   def index
     @aquarium = Aquarium.new
     @aquaria = Aquarium.all.order(created_at: :desc)
+    @like = Like.new
   end
 
   def show
     @aquarium = Aquarium.find(params[:id])
+    @like = Like.new
+    @liked_users = @aquarium.liked_users
   end
 
   def new
@@ -26,7 +29,7 @@ class AquariaController < ApplicationController
         format.html { redirect_to @aquarium }
         format.js { @status = "fail" }
       end
-    end 
+    end
   end
 
   def edit
@@ -45,7 +48,7 @@ class AquariaController < ApplicationController
         format.html { redirect_to @aquarium }
         format.js { @status = "fail" }
       end
-    end 
+    end
   end
 
   def destroy
@@ -55,10 +58,9 @@ class AquariaController < ApplicationController
     redirect_to aquaria_path
   end
 
-private
+  private
 
-def aquarium_params
-  params.require(:aquarium).permit(:aquarium_introduction, :aquarium_image, :user_id)
-end
-
+  def aquarium_params
+    params.require(:aquarium).permit(:aquarium_introduction, :aquarium_image, :user_id)
+  end
 end

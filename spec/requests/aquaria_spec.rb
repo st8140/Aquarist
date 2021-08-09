@@ -13,11 +13,19 @@ RSpec.describe "Aquaria", type: :request do
       aquarium_image: image,
       user_id: user_1.id
     )
-
     @aquarium_2 = Aquarium.create(
       aquarium_introduction: "test_2",
       aquarium_image: image,
       user_id: user_2.id
+    )
+    @like_1 = Like.create(
+      user_id: user_1.id,
+      aquarium_id: @aquarium_2.id
+    )
+
+    @like_2 = Like.create(
+      user_id: user_2.id,
+      aquarium_id: @aquarium_1.id
     )
   end
 
@@ -50,6 +58,11 @@ RSpec.describe "Aquaria", type: :request do
       expect(response.body).to include(@aquarium_1.aquarium_image.to_s)
       expect(response.body).to include(@aquarium_2.aquarium_image.to_s)
     end
+
+    it "いいねが正常に表示される" do
+      expect(response.body).to include(@aquarium_1.likes.count.to_s)
+      expect(response.body).to include(@aquarium_2.likes.count.to_s)
+    end
   end
 
   describe "GET /aquaria/:id" do
@@ -76,6 +89,10 @@ RSpec.describe "Aquaria", type: :request do
 
     it "プロフィール画像が正常に表示される" do
       expect(response.body).to include(user_1.user_image.to_s)
+    end
+
+    it "いいねが正常に表示される" do
+      expect(response.body).to include(@aquarium_1.likes.count.to_s)
     end
   end
 

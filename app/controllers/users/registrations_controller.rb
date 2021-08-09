@@ -4,8 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   before_action :check_guest, only: :destroy
-
-
   def check_guest
     if resource.email == 'test@com'
       redirect_to aquaria_path, alert: 'テストユーザーは削除できません。'
@@ -13,8 +11,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_posts
-    @user = User.find_by(id: params[:id]) 
+    @user = User.find(params[:id])
     @aquarium = Aquarium.new
+  end
+
+  def liked_aquaria
+    @user = User.find(params[:id])
   end
   # GET /resource/sign_up
   # def new
@@ -79,6 +81,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
-
 end
