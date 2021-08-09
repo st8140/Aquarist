@@ -6,7 +6,7 @@ class LikesController < ApplicationController
     @like.save
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }
-      format.js {  }
+      format.js { @status = "true" }
     end
   end
 
@@ -15,13 +15,13 @@ class LikesController < ApplicationController
     @like.destroy
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }
-      format.js {  }
+      format.js { @status = "true" }
     end
   end
 
   private
+
   def set_aquarium
     @aquarium = Aquarium.find(params[:aquarium_id])
   end
-
 end

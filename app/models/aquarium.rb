@@ -1,5 +1,5 @@
 class Aquarium < ApplicationRecord
-  validates :aquarium_introduction, presence: true, length: {maximum: 50}       
+  validates :aquarium_introduction, presence: true, length: { maximum: 50 }
   validates :aquarium_image, presence: { message: 'を選択してください' }
 
   belongs_to :user
@@ -9,7 +9,6 @@ class Aquarium < ApplicationRecord
   mount_uploader :aquarium_image, AquariumImageUploader
 
   def user
-    return User.find_by(id: self.user_id)
+    User.find_by(id: user_id)
   end
-
 end

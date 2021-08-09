@@ -18,3 +18,4 @@ AllCops:
     - 'vendor/**/*'
     - '.git/**/*'
     - 'spec/**/*'
+    - 'app/uploaders/**'

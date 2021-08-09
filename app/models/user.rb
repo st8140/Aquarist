@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
 
@@ -13,10 +12,10 @@ class User < ApplicationRecord
   mount_uploader :user_image, UserImageUploader
 
   def aquaria
-    return Aquarium.where(user_id: self.id)
+    Aquarium.where(user_id: id)
   end
 
   def already_liked?(aquarium)
-    self.likes.exists?(aquarium_id: aquarium.id)
+    likes.exists?(aquarium_id: aquarium.id)
   end
 end
