@@ -1,0 +1,65 @@
+<div id="comment-flash"><%= render "comments/flash" %></div><br>
+
+<%= comments.count %>件コメント
+<h6>
+  <%= link_to "もっと見る....", "#collapseExample", class: "btn", "data-bs-toggle": :"collapse", role: "button", "aria-expanded": :"false", "aria-controls": :"collapseExample" %>
+</h6>
+<% comments.order(created_at: :desc).first(2).each do |comment| %>
+  <% if comment.id.present? %>
+    <li class="comment-box mt-2" id="comment_<%= comment.id %>">
+      <div class="row border p-2">
+        <%= link_to image_tag(comment.user.user_image.to_s, alt: "user-icon", class: "host-icon comment-user-icon"), detail_path(comment.user.id), class: "col-lg-1 col-sm-1" %>
+        <div class="col-lg-7 col-sm-6 ms-2">
+          <span>
+            <%= link_to comment.user.name, detail_path(comment.user.id), class: "user-name" %>
+          </span>
+          <br>
+          <p class="time-stamp">
+            <%= "#{time_ago_in_words(comment.created_at)}前に投稿" %>
+          </p>
+          <div class="comment-content" id="this_comment_<%= comment.id %>">
+            <%= comment.content %>
+          </div>
+        </div>
+        <% if current_user.id == comment.user_id %>
+          <div class="col-lg-2 comment-delete">
+            <%= link_to aquarium_comment_path(comment.aquarium_id, comment.id), method: "delete", remote: true, :data => {:confirm => '本当にコメントを削除しますか?'} do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
+
+<div class="collapse" id="collapseExample">
+  <% comments.order(created_at: :desc).offset(2).each do |comment| %>
+    <% if comment.id.present? %>
+      <li class="comment-box mt-2" id="comment_<%= comment.id %>">
+        <div class="row border p-2">
+          <%= link_to image_tag(comment.user.user_image.to_s, alt: "user-icon", class: "host-icon comment-user-icon"), detail_path(comment.user.id), class: "col-lg-1 col-sm-1" %>
+          <div class="col-lg-7 col-sm-6 ms-2">
+            <span>
+              <%= link_to comment.user.name, detail_path(comment.user.id), class: "user-name" %>
+            </span>
+            <br>
+            <p class="time-stamp">
+              <%= "#{time_ago_in_words(comment.created_at)}前に投稿" %>
+            </p>
+            <div class="comment-content" id="this_comment_<%= comment.id %>">
+              <%= comment.content %>
+            </div>
+          </div>
+          <% if current_user.id == comment.user_id %>
+            <div class="col-lg-2 comment-delete">
+              <%= link_to aquarium_comment_path(comment.aquarium_id, comment.id), method: "delete", remote: true, :data => {:confirm => '本当にコメントを削除しますか?'} do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</div>

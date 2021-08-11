@@ -1,2 +1,0 @@
-module AquariumsHelper
-end

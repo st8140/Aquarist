@@ -294,25 +294,6 @@ a.nav-link {
   left: -50px;
 }
 
-.like-user-icon {
-  width: 45px;
-  height:45px;
-}
-
-.like-user-name {
-  display: flex;
-  align-items: center;
-}
-
-.comment-list {
-  border-bottom: 1px solid  #dcdcdc;
-  display: table-cell;
-}
-
-.comment-table {
-  display: table;
-}
-
 .btn-circle {
   display: inline-block;
   text-decoration: none;
@@ -333,6 +314,10 @@ a.nav-link {
     background: #668ad8;
   }
 }
+
+.comment-count a {
+  color: #222;
+} 
 
 
 @media screen and( max-width:576px ) {
@@ -500,10 +485,6 @@ margin: 30px auto;
   border-top: initial;
 }
 
-label.col-form-label {
-  font-size: 20px;
-}
-
 #new-modal-error {
   color: red;
 }
@@ -555,4 +536,62 @@ label.col-form-label {
   background-color: #fff;
   border-color: #0D6EFD;
   color: #0D6EFD;
+}
+
+.like-user-icon {
+  width: 45px;
+  height:45px;
+}
+
+.like-user-name {
+  display: flex;
+  align-items: center;
+}
+
+// ------------------------------------------ comments_index ------------------------------------------ //
+
+.comment-user-icon {
+  width: 45px;
+  height:45px;
+}
+
+.comment-form {
+  padding: 20px;
+}
+
+#comments-area {
+  padding: 20px;
+
+  li {
+    list-style: none;
+  }
+}
+
+.comment-delete {
+  text-align: end;
+  position: relative;
+  top: 65px;
+  left: 50px;
+
+  a {
+    color: #222;
+  }
+}
+
+#comment-form-error {
+  color: red;
+}
+
+.comment-flash {
+  color: white;
+  text-align: center;
+  padding: 5px;
+  &__alert{
+    color: red;
+    border: 1px red solid;
+  }
+  &__notice {
+    color: blue;
+    border: 1px blue solid;
+  }
 }

@@ -1,0 +1,3 @@
+$('#comments-area').html("<%= j(render 'comments/index', { comments: @comment.aquarium.comments, aquarium: @aquarium.comments }) %>");
+$("textarea").val('');
+$('#comment-form-error').remove();

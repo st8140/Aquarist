@@ -31,6 +31,9 @@ ja:
       aquarium:
         aquarium_introduction: "投稿内容"
         aquarium_image: "画像"
+    attributes:
+      comment:
+        content: "コメント"
     models:
       user: ユーザー
   devise:

@@ -11,6 +11,8 @@ class AquariaController < ApplicationController
     @aquarium = Aquarium.find(params[:id])
     @like = Like.new
     @liked_users = @aquarium.liked_users
+    @comment = Comment.new
+    @comments = @aquarium.comments.all.order(create_at: :desc)
   end
 
   def new
