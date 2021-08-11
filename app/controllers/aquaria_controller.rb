@@ -12,7 +12,7 @@ class AquariaController < ApplicationController
     @like = Like.new
     @liked_users = @aquarium.liked_users
     @comment = Comment.new
-    @comments = @aquarium.comments.all.order(create_at: :desc)
+    @comments = @aquarium.comments.all.order(created_at: :desc)
   end
 
   def new
