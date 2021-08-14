@@ -2,21 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
   let(:user) { create(:user) }
-  let(:image_path) { File.join(Rails.root, 'app/assets/images/no_image.jpg') }
-  let(:image) { Rack::Test::UploadedFile.new(image_path) }
-
-  before do
-    @aquarium = Aquarium.create(
-      aquarium_introduction: "test",
-      aquarium_image: image,
-      user_id: user.id
-    )
-    @like = Like.create(
-      user_id: user.id,
-      aquarium_id: @aquarium.id
-    )
-  end
-
+  let(:aquarium) { create(:aquarium, user_id: user.id) }
+  let!(:like) { create(:like, user_id: user.id, aquarium_id: aquarium.id) }
+  
   describe "GET /registrations/new" do
     it "アカウント登録画面の表示に成功すること" do
       get new_user_registration_path
@@ -69,15 +57,15 @@ RSpec.describe "Users", type: :request do
     end
 
     it "投稿内容が正常に表示されること" do
-      expect(response.body).to include(@aquarium.aquarium_introduction)
+      expect(response.body).to include(aquarium.aquarium_introduction)
     end
 
     it "画像が正常に表示されること" do
-      expect(response.body).to include(@aquarium.aquarium_image.to_s)
+      expect(response.body).to include(aquarium.aquarium_image.to_s)
     end
 
     it "いいねが正常に表示される" do
-      expect(response.body).to include(@aquarium.likes.count.to_s)
+      expect(response.body).to include(aquarium.likes.count.to_s)
     end
   end
 
@@ -101,15 +89,15 @@ RSpec.describe "Users", type: :request do
     end
 
     it "投稿内容が正常に表示される" do
-      expect(response.body).to include(@aquarium.aquarium_introduction)
+      expect(response.body).to include(aquarium.aquarium_introduction)
     end
 
     it "アクアリウム画像が正常に表示される" do
-      expect(response.body).to include(@aquarium.aquarium_image.to_s)
+      expect(response.body).to include(aquarium.aquarium_image.to_s)
     end
 
     it "いいねが正常に表示される" do
-      expect(response.body).to include(@aquarium.likes.count.to_s)
+      expect(response.body).to include(aquarium.likes.count.to_s)
     end
   end
 

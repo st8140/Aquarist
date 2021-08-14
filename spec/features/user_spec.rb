@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
+  given!(:user) { create(:user, email: 'test1@example.com', password: 'testuser') }
 
   feature "ログインとログアウトの検証" do
-    background do
-      @user = create(:user)
-    end
-
     scenario "ログインに成功する" do
       visit new_user_session_path
 
@@ -19,21 +16,18 @@ RSpec.feature "Users", type: :feature do
     scenario "ログインに失敗する" do
       visit new_user_session_path
 
-      fill_in 'メールアドレス', with: 'test2@example.com'
+      fill_in 'メールアドレス', with: 'test1@example.com'
       fill_in 'パスワード', with: 'testuser2'
       click_button 'ログイン'
       expect(page).to have_content 'パスワードが違います'
     end
 
     scenario "ログアウトする", js: true do 
-      visit new_user_session_path
+        sign_in user
+        visit aquaria_path
 
-      fill_in 'メールアドレス', with: 'test3@example.com'
-      fill_in 'パスワード', with: 'testuser'
-      click_button 'ログイン'
       find("#current_user").click
       click_on 'ログアウト'
-
       expect(page).to have_content 'ログアウトしました'
     end
   end

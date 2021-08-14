@@ -32,7 +32,7 @@
                         <%= aquarium.likes.count %>
 
                         <div class="comment-count">
-                          <%= link_to aquarium_path(aquarium, anchor: "comment-form-error") do %>
+                          <%= link_to aquarium_path(aquarium, anchor: "comment-form") do %>
                             <span class="far fa-comment-dots"></span>
                             <%= aquarium.comments.count %>
                           <% end %>
@@ -69,7 +69,7 @@
                       <%= aquarium.likes.count %>
 
                       <div class="comment-count">
-                        <%= link_to aquarium_path(aquarium, anchor: "comment-form-error") do %>
+                        <%= link_to aquarium_path(aquarium, anchor: "comment-form") do %>
                             <span class="far fa-comment-dots"></span>
                             <%= aquarium.comments.count %>
                           <% end %>

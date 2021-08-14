@@ -27,13 +27,9 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
-    attributes:
       aquarium:
         aquarium_introduction: "投稿内容"
         aquarium_image: "画像"
-    attributes:
-      comment:
-        content: "コメント"
     models:
       user: ユーザー
   devise:

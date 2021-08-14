@@ -23,7 +23,7 @@
         </div>
         <% if current_user.id == comment.user_id %>
           <div class="col-lg-2 comment-delete">
-            <%= link_to aquarium_comment_path(comment.aquarium_id, comment.id), method: "delete", remote: true, :data => {:confirm => '本当にコメントを削除しますか?'} do %>
+            <%= link_to aquarium_comment_path(comment.aquarium_id, comment.id), method: "delete", remote: true, :data => {:confirm => '本当にコメントを削除しますか?'}, id: "comment-delete-btn" do %>
               <i class="fas fa-trash-alt"></i>
             <% end %>
           </div>
@@ -53,7 +53,7 @@
           </div>
           <% if current_user.id == comment.user_id %>
             <div class="col-lg-2 comment-delete">
-              <%= link_to aquarium_comment_path(comment.aquarium_id, comment.id), method: "delete", remote: true, :data => {:confirm => '本当にコメントを削除しますか?'} do %>
+              <%= link_to aquarium_comment_path(comment.aquarium_id, comment.id), method: "delete", remote: true, :data => {:confirm => '本当にコメントを削除しますか?'}, id: "comment-delete-btn-cl" do %>
                 <i class="fas fa-trash-alt"></i>
               <% end %>
             </div>

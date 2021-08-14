@@ -18,14 +18,4 @@ RSpec.feature "Homes", type: :feature do
       expect(page).to have_link '新規登録', href: new_user_registration_path
     end
   end
-
-  feature "ハンバーガーメニューの検証" do
-    background do
-      find("#hamburger").click
-    end
-    scenario "ログイン,新規登録が正常に表示される"  do
-      expect(page).to have_content("ログイン")
-      expect(page).to have_content("新規登録")
-    end
-  end
 end

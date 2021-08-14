@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :comment do
-    content { "MyString" }
-    user { nil }
-    aquarium { nil }
+    sequence(:content) { |n| "test comment_#{n}" }
+    association :user
+    association :aquarium
   end
 end

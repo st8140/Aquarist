@@ -555,7 +555,7 @@ margin: 30px auto;
   height:45px;
 }
 
-.comment-form {
+#comment-form {
   padding: 20px;
 }
 
@@ -594,4 +594,11 @@ margin: 30px auto;
     color: blue;
     border: 1px blue solid;
   }
+}
+
+@media screen and ( max-width:992px ){
+  .comment-delete {
+    position: initial;
+  }
+  
 }

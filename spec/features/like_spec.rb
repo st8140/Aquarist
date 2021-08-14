@@ -1,18 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "Likes", type: :feature do
-  given(:image_path) { File.join(Rails.root, 'spec/fixtures/test.jpg') }
-  given(:image) { Rack::Test::UploadedFile.new(image_path) }
   given(:user_1) { create(:user) }
   given(:user_2) { create(:user) }
+  given!(:aquarium) { create(:aquarium, user_id: user_2.id) }
 
   background do
     sign_in user_1
-    @aquarium = Aquarium.create(
-      aquarium_introduction: "test",
-      aquarium_image: image,
-      user_id: user_2.id
-    )
   end
   
   feature "投稿一覧画面の検証" do
@@ -34,7 +28,7 @@ RSpec.feature "Likes", type: :feature do
 
   feature "投稿詳細画面の検証" do
     background do
-      visit aquarium_path(@aquarium.id)
+      visit aquarium_path(aquarium.id)
     end
 
     scenario "新規いいねに成功する", js: true do
@@ -70,10 +64,9 @@ RSpec.feature "Likes", type: :feature do
     background do
       @like = Like.create(
         user_id: user_1.id,
-        aquarium_id: @aquarium.id
+        aquarium_id: aquarium.id
       )
       visit users_liked_aquaria_path(user_1.id)
-
     end
     
     scenario "いいねの取り消しに成功する", js: true do
