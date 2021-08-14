@@ -39,10 +39,16 @@ RSpec.describe "Users", type: :request do
     it "プロフィール画像が正常に表示される" do
       expect(response.body).to include(user.user_image.to_s)
     end
+    
+    it "自己紹介が正常に表示される" do
+      user.introduction = "test"
+      expect(response.body).to include(user.introduction)
+    end
 
     it "メールアドレスが正常に表示される" do
       expect(response.body).to include(user.email)
     end
+
   end
 
   describe "GET /registrations/user_posts" do

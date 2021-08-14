@@ -397,6 +397,13 @@ a.nav-link.active {
   }
 }
 
+.introduction {
+  height: 150px;
+
+  label {
+    margin-top: 40px;
+  }
+}
 
 .col-md-8.user-detail.bg-color {
   margin: 0 auto;
@@ -408,12 +415,20 @@ a.nav-link.active {
 }
 
 label.col-md-5.user-icon {
-  margin-top: 12px;
+  margin-top: 20px;
 }
 
 @media screen and ( max-width:992px ){
   .col-md-8.user-detail.bg-color {
     width: 880px;
+  }
+
+  .introduction label {
+    margin-top: initial;
+  }
+
+  label.col-md-5.user-icon {
+    margin-top: initial;
   }
   
 }

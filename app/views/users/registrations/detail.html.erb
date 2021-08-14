@@ -1,4 +1,4 @@
-<%= provide(:title, "user_detail") %>
+<%= provide(:title, "アカウント詳細") %>
 <div class="container user py-4">
   <div class="row">
     <%= render "users_navbar" %>
@@ -22,6 +22,15 @@
             <label class="col-md-5 user-icon" for="user_image">プロフィール画像</label>
             <div class="col-md-7">
               <%= image_tag(@user.user_image.to_s, alt: "user_image", class: "host-icon") %>
+            </div>
+          </div>
+        </div>
+
+        <div class="update-content introduction">
+          <div class="row">
+            <label class="col-md-5" for="introduction">自己紹介</label>
+            <div class="col-md-7">
+              <%= @user.introduction %>
             </div>
           </div>
         </div>
