@@ -27,8 +27,9 @@
                       </div>
                       
                       <div class="comment-count">
-                        <%= link_to "#" do %>
-                          <i class="far fa-comment-dots">0</i>
+                        <%= link_to aquarium_path(aquarium, anchor: "comment-form") do %>
+                          <span class="far fa-comment-dots"></span>
+                          <%= aquarium.comments.count %>
                         <% end %>
                       </div>
                     </div>
@@ -61,8 +62,9 @@
                       </div>
 
                       <div class="comment-count">
-                        <%= link_to "#" do %>
-                          <i class="far fa-comment-dots">0</i>
+                        <%= link_to aquarium_path(aquarium, anchor: "comment-form") do %>
+                          <span class="far fa-comment-dots"></span>
+                          <%= aquarium.comments.count %>
                         <% end %>
                       </div>
                     </div>

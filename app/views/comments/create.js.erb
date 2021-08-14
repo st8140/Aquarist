@@ -1,0 +1,4 @@
+<% if @status == "fail" %>
+  $('#comment-form-error').html("<ul><% @comment.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>")
+<% end %>
+$('#comment-flash').remove();

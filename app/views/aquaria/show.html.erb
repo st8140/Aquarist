@@ -61,7 +61,18 @@
           </div>
         </div>
       </div>
-      <div class="container comment-table">
+      <div class="border-bottom"></div>
+      <div class="container mt-3">
+        <div id="comment-form">
+          <%= render partial: "comments/comment_form", locals: { aquarium: @aquarium, comment: @comment }  %>
+        </div>
+        <div class="row">
+          <ul id="comments-area">
+            <li>
+              <%= render partial: "comments/index", locals: { comments: @comments, aquarium: @aquarium } %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

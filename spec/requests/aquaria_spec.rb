@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe "Aquaria", type: :request do
   let(:user_1) { create(:user) }
   let(:user_2) { create(:user) }
-  let(:image_path) { File.join(Rails.root, 'app/assets/images/no_image.jpg') }
+  let(:image_path) { File.join(Rails.root, 'spec/fixtures/test.jpg') }
   let(:image) { Rack::Test::UploadedFile.new(image_path) }
+  let(:aquarium) { create(:aquarium, user_id: user_1.id) }
 
   before do
     sign_in user_1
@@ -67,7 +68,12 @@ RSpec.describe "Aquaria", type: :request do
 
   describe "GET /aquaria/:id" do
     before do
-      get aquaria_path(user_1)
+      get aquarium_path(aquarium)
+      @comment = Comment.create(
+        content: "test",
+        user_id: user_2.id,
+        aquarium_id: aquarium.id
+      )
     end
 
     it "投稿詳細画面の表示に成功すること" do
@@ -76,11 +82,11 @@ RSpec.describe "Aquaria", type: :request do
     end
 
     it "アクアリウム画像が正常に表示される" do
-      expect(response.body).to include(@aquarium_1.aquarium_image.to_s)
+      expect(response.body).to include(aquarium.aquarium_image.to_s)
     end
 
     it "投稿内容が正常に表示される" do
-      expect(response.body).to include(@aquarium_1.aquarium_introduction)
+      expect(response.body).to include(aquarium.aquarium_introduction)
     end
 
     it "名前が正常に表示される" do
@@ -92,7 +98,11 @@ RSpec.describe "Aquaria", type: :request do
     end
 
     it "いいねが正常に表示される" do
-      expect(response.body).to include(@aquarium_1.likes.count.to_s)
+      expect(response.body).to include(aquarium.likes.count.to_s)
+    end
+
+    it "コメントが正常に表示される" do
+      expect(response.body).to include(@comment.content)
     end
   end
 

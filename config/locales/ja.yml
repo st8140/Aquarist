@@ -2,11 +2,16 @@ ja:
   activerecord:
     models:
       aquarium: "アクアリウム"
-
+      comment: "コメント"
     attributes:
       created_at: 作成日
       updated_at: 更新日
+    
 
+    attributes:
+      comment:
+        content: "コメント"
+        
     datetime:
     distance_in_words:
       about_x_hours:
