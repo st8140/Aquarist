@@ -6,7 +6,12 @@
 #
 default: &default
   adapter: sqlite3
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { "127.0.0.1" } %>
+  username: <%= ENV.fetch("DATABASE_USER") { "test" } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { "test" } %>
+  database: <%= ENV.fetch("DATABASE_NAME") { "my_project" } %>
   timeout: 5000
 
 development:

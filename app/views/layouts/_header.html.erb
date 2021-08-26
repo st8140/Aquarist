@@ -10,7 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto fs-4">
-          <li class="nav-item">
+          <li class="nav-item search-link">
             <%= link_to "ショップ検索", maps_path, class: "nav-link me-4" %>
           </li>
           <div class="d-lg-block d-none">
@@ -30,7 +30,7 @@
             </li>
           </div>
           <div class="d-lg-none">
-            <li class="nav-item mb-2"><%= link_to "アカウント", detail_path(current_user.id), class: "nav-account-item" %></li>
+            <li class="nav-item"><%= link_to "アカウント", detail_path(current_user.id), class: "nav-account-item" %></li>
             <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :deletes, class: "nav-account-item" %></li>
           </div>
         </ul>
