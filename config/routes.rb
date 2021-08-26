@@ -20,5 +20,7 @@ Rails.application.routes.draw do
     resource :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
+
+  resources :maps, only: :index
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

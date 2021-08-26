@@ -1,0 +1,17 @@
+<%= provide(:title, "ショップサーチ") %>
+
+<div class="container bg-color py-4 mt-3">
+  <div id="target"></div>
+  <button id="search" class="btn btn-primary">近所のアクアショップを探す</button>
+  <input type="text" id="address" placeholder="住所を指定して探す">
+  <button id="addressSearch" class="btn btn-primary"><i class="fas fa-search"></i></button>
+  <div class="border-bottom"></div>
+  <div class="result-list">アクアショップ検索結果一覧</div>
+  <h6 class="result-text">*画像クリックでwebサイトにアクセスできます</h6>
+  <h6 class="result-text result-sub-text">（webサイトを公開している場合に限る）</h6>
+  <div class="container result-container">
+    <div class="row" id="result-row">
+    </div>
+  </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyCuq3l2RRaOCrWCJkwt2yRg3LC4Mu2k990&callback=initMap&libraries=places" async defer></script>
