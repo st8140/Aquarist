@@ -1,10 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { create(:user, email: "test@example.com") }
-  before(:each) do
-    # @user = FactoryBot.build(:user)
-  end
+  let(:user) { build(:user, email: "test@example.com") }
 
   it "名前、メールアドレス、パスワードがあれば有効であること" do
     expect(user).to be_valid
@@ -22,13 +19,14 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to include("を入力してください")
   end
 
-  it "パスワードが無ければ無効な状態であること" do
+  it "パスワードが無ければ無効な状態であること", js: true do
     user.password = nil
     user.valid?
     expect(user.errors[:password]).to include("を入力してください")
   end
 
   it "重複したメールアドレスは無効であること" do
+    @user = create(:user, email: "test@example.com")
     @user = build(:user, email: "test@example.com")
     @user.valid?
     expect(@user.errors[:email]).to include("はすでに存在します")

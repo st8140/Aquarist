@@ -22,6 +22,10 @@ RSpec.feature "Aquaria", type: :feature do
     scenario "投稿詳細リンクが正常であること" do
       expect(page).to have_link 'aquarium_image', href: aquarium_path(aquarium)
     end
+
+    scenario "ショップ検索リンクが正常であること" do
+      expect(page).to have_link 'ショップ検索', href: maps_path
+    end
   end
 
   feature "投稿詳細ページ、リンク先の検証" do
@@ -78,6 +82,18 @@ RSpec.feature "Aquaria", type: :feature do
       fill_in 'message-text', with: nil
       click_button '更新する'
       expect(page).to have_content '投稿内容を入力してください'
+    end
+  end
+
+  feature "投稿削除の検証" do
+    background do
+      visit aquarium_path(aquarium)
+    end
+
+    scenario "削除に成功する", js:true do
+      find('#delete-button').click
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content '投稿を削除しました'
     end
   end
 

@@ -234,7 +234,7 @@ function initMap() {
                   <ul class='result-content'>
                     <li class='store_name text-primary border-bottom mb-2'>${place.name}</li>
                     <li class='store_address'>${place.formatted_address}</li>
-                    <li>総合評価: <i class="fas fa-star text-warning"><span>${place.rating}</span></li>
+                    <li>総合評価: <i class="fas fa-star text-warning"></i><span>${place.rating}</span></li>
                     <li>クチコミ件数: <span>${place.user_ratings_total}</span>件</li>
                   </ul>
                   <div class='shop-images'>

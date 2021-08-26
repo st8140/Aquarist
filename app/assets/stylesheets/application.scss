@@ -357,6 +357,13 @@ a.nav-link.me-4 {
     position: relative;
     left: -70px;
   }
+
+  .btn-circle {
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+  }
 }
 // ------------------------------------------ users_sessions_new ------------------------------------------ //
 
@@ -468,6 +475,15 @@ label.col-md-5.user-icon {
 // ------------------------------------------ users_edit ------------------------------------------ //
 
 .account-delete {
+  color: red;
+}
+
+.edit-error-message {
+  font-size: 20px !important;
+  color: red;
+}
+
+.edit-error-li {
   color: red;
 }
 
