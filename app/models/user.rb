@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :aquaria, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_aquaria, through: :likes, source: :aquarium
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   mount_uploader :user_image, UserImageUploader
 

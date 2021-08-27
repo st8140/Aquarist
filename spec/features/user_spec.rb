@@ -40,8 +40,35 @@ RSpec.feature "Users", type: :feature do
     fill_in 'password_field', with: 'foobar'
     fill_in 'password_confirmation_field', with: 'foobar'
     click_on 'アカウント登録'
-
     expect(page).to have_content 'アカウント登録が完了しました'
+  end
 
+  
+  
+  feature "ユーザー編集、削除の検証" do
+    background do
+      sign_in user
+      visit edit_user_registration_path
+    end
+    
+    scenario "ユーザー編集に成功する", js: true do
+      fill_in 'user_introduction', with: 'テストテスト'
+      fill_in 'user_current_password', with: 'testuser'
+      click_on '更新'
+      expect(page).to have_content 'アカウント情報を変更しました'
+    end
+    
+    scenario "ユーザー編集に失敗する", js: true do
+      fill_in 'user_introduction', with: 'テストテスト'
+      fill_in 'user_current_password', with: ''
+      click_on '更新'
+      expect(page).to have_content '1 件のエラーが発生したため ユーザー は保存されませんでした。'
+    end
+
+    scenario "ユーザーの削除", js: true do
+      click_on 'アカウント削除'
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content 'アカウントを削除しました。またのご利用をお待ちしております。'
+    end
   end
 end
