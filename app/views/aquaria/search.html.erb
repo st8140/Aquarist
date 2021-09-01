@@ -1,0 +1,24 @@
+<div class="container">
+  <h4 class="mt-5 mb-3">検索結果: <%= @count %>件</h4>
+  <div class="row">
+    <% @results.each do |aquarium| %>
+      <div class="search-aquarium-box col-sm-6 col-lg-4 col-xl-3">
+        <div class="search-aquarium-inner shadow-sm p-3 mb-5 bg-white rounded">
+          <%= link_to aquarium_path(aquarium) do %>
+            <div class="aquarium-image-out">
+              <% if aquarium.persisted? && aquarium.aquarium_image? %>
+                <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium-image", class: "aquarium-image") %>
+              <% else %>
+                <%= image_tag("no_image.jpg", alt: "aquarium-image", class: "img-thumbnail") %>
+              <% end %>
+            </div>
+          <% end %>
+          <p class="time-stamp">
+              <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
+          </p>
+          <%= aquarium.aquarium_introduction %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

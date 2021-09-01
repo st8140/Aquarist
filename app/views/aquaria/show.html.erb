@@ -8,9 +8,9 @@
       <div class="bg-dark">
         <div class="aquaria-image mb-4">
           <% if @aquarium.persisted? && @aquarium.aquarium_image? %>
-            <%= image_tag(@aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image") %>
+            <%= image_tag(@aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
           <% else %>
-            <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image") %>
+            <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
           <% end %>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<%= provide(:title, "users-posts") %>
+<%= provide(:title, "自分の投稿") %>
 <div class="modal fade" id="new-modal" tabindex="-1" aria-hidden="true", role="dialog"></div>
 
 <div class="container user py-4">
@@ -35,10 +35,12 @@
                     </div>
                     
                     <div class="col-lg-3 col-sm-12">
-                      <% if aquarium.persisted? && aquarium.aquarium_image? %>
-                        <%= link_to image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
-                      <% else %>
-                        <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
+                      <%= link_to aquarium_path(aquarium) do %>
+                        <% if aquarium.persisted? && aquarium.aquarium_image? %>
+                          <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+                        <% else %>
+                          <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+                        <% end %>
                       <% end %>
                     </div>
                   </div>
@@ -68,10 +70,12 @@
                         <% end %>
                       </div>
                     </div>
-                    <% if aquarium.persisted? && aquarium.aquarium_image? %>
-                      <%= link_to image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
-                    <% else %>
-                      <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
+                    <%= link_to aquarium_path(aquarium) do %>
+                      <% if aquarium.persisted? && aquarium.aquarium_image? %>
+                        <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+                      <% else %>
+                        <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>

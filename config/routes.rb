@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   root 'home#top'
   get '/' => 'home#top'
   resources :aquaria do
+    collection do
+      get 'search'
+    end
     resource :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :edit, :update, :destroy]
   end

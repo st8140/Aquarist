@@ -35,6 +35,7 @@ gem 'carrierwave', '~> 2.2.1'
 gem 'haml-rails'
 gem 'dotenv-rails'
 gem 'fog-aws'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

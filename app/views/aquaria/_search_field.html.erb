@@ -1,0 +1,7 @@
+<%= search_form_for q, url: url do |f| %>
+  <div class="search-field">
+    <%= f.search_field :aquarium_introduction_cont, class: "form-control", placeholder: '投稿検索' %>
+    <i class="fas fa-search"></i>
+  </div>
+  <%= f.submit class: "d-none" %>
+<% end %>
