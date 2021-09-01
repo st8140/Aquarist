@@ -30,9 +30,9 @@
           <div class="col-lg-3 col-sm-12">
             <%= link_to aquarium_path(aquarium) do %>
               <% if aquarium.persisted? && aquarium.aquarium_image? %>
-                <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+                <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail img-hover") %>
               <% else %>
-                <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+                <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail img-hover") %>
               <% end %>
             <% end %>
           </div>

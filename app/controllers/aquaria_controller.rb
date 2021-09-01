@@ -62,12 +62,12 @@ class AquariaController < ApplicationController
   end
 
   def search
-    @results = @q.result.order(created_at: :desc) 
+    @results = @q.result.order(created_at: :desc)
     @count = @results.count
   end
-  
+
   private
-  
+
   def set_q
     @q = Aquarium.ransack(params[:q])
   end

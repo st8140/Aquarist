@@ -1,4 +1,4 @@
-<%= provide(:title, "log_in") %>
+<%= provide(:title, "ログイン") %>
 
 <div class="container devise">
   <div class="devise-form">
@@ -8,11 +8,11 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field form-row mt-5">
           <%= f.label :メールアドレス %>
-          <%= f.email_field :email, class: "form-control col-10 px-2", autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
+          <%= f.email_field :email, class: "form-control col-10 px-2", autofocus: true, autocomplete: "email" %>
         </div>
         <div class="field form-row">
           <%= f.label :パスワード %>
-          <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "current-password", placeholder: "パスワード"%>
+          <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "current-password" %>
         </div>
         <% if devise_mapping.rememberable? %>
           <div class="field">
@@ -26,7 +26,7 @@
       <% end %>
         <%= link_to "アカウント登録", new_user_registration_path %>
         <br>
-        <%= link_to "パスワードを忘れましたか？", new_user_password_path %> <!-- ()入れる -->
+        <%= link_to "パスワードを忘れましたか？", new_user_password_path %>
         <br>
       <div class="test-user-login border-top">
         <%= link_to "ログイン(テストユーザー)", users_guest_sign_in_path, method: :post, class: "form-control btn-primary my-4" %>

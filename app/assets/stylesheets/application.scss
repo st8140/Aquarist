@@ -41,6 +41,10 @@ a.nav-link {
   }
 }
 
+html,body {
+  height: 100%;
+}
+
 // ------------------------------------------ top ------------------------------------------ //
 
 .cover {
@@ -254,6 +258,12 @@ a.nav-link.me-4 {
     display: inline-block;
   }
 
+  .img-hover {
+    &:hover {
+      transform:scale(1.2,1.2);
+    }
+  }
+
   @media screen and ( max-width:992px ) {
     
     .posts-table:nth-child(n + 1) {
@@ -421,7 +431,7 @@ a.nav-link.me-4 {
 // ------------------------------------------ users/sessions/new ------------------------------------------ //
 
 .devise-form h2 {
-  font-size: 50px;
+  font-size: 45px;
   margin-bottom: 60px;
   letter-spacing: 3px;
 }
@@ -446,10 +456,10 @@ a.nav-link.me-4 {
   margin: 0px auto;
   background-color: white;
   border-radius: 20px;
+  padding: 50px 120px;
 }
 
 .devise-inner {
-  width: 360px;
   margin: 0px auto;
 }
 
@@ -531,13 +541,9 @@ label.col-md-5.user-icon {
   color: red;
 }
 
-.edit-error-message {
-  font-size: 20px !important;
+.error-li {
   color: red;
-}
-
-.edit-error-li {
-  color: red;
+  text-align: initial;
 }
 
 // ------------------------------------------ users/registrations/user_posts ------------------------------------------ //
@@ -603,10 +609,14 @@ margin: 30px auto;
 
 #new-modal-error {
   color: red;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
 }
 
 #edit-modal-error {
   color: red;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
 }
 
 .modal .modal-content {

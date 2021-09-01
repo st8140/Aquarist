@@ -94,4 +94,27 @@ RSpec.describe "Aquaria", type: :request do
       expect(response.body).to include(@comment.content)
     end
   end
+
+  describe "GET /aquaria/search" do
+    before do
+      get search_aquaria_path
+    end
+
+    it "検索結果画面の表示に成功すること" do
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+
+    it "アクアリウム画像が表示される" do
+      expect(response.body).to include(aquarium_1.aquarium_image.to_s)
+      expect(response.body).to include(aquarium_2.aquarium_image.to_s)
+    end
+
+    it "投稿内容が正常に表示される" do
+      expect(response.body).to include(aquarium_1.aquarium_introduction)
+      expect(response.body).to include(aquarium_2.aquarium_introduction)
+    end
+
+
+  end
 end

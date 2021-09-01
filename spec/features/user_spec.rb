@@ -62,7 +62,7 @@ RSpec.feature "Users", type: :feature do
       fill_in 'user_introduction', with: 'テストテスト'
       fill_in 'user_current_password', with: ''
       click_on '更新'
-      expect(page).to have_content '1 件のエラーが発生したため ユーザー は保存されませんでした。'
+      expect(page).to have_content '現在のパスワードを入力してください'
     end
 
     scenario "ユーザーの削除", js: true do
