@@ -100,7 +100,7 @@ RSpec.feature "Aquaria", type: :feature do
   feature "current_user.id != aquarium.user_idの場合" do
     background do
       sign_in other_user
-      visit aquarium_path(user.id)
+      visit aquarium_path(aquarium)
     end
 
     scenario "編集リンクが表示されない" do

@@ -68,6 +68,7 @@ group :test do
   gem 'poltergeist'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'faker'
 end
 
 group :production do

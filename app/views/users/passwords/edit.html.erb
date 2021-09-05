@@ -2,7 +2,7 @@
 
 <div class="container devise">
   <div class="devise-form">
-    <h2 class="my-4 fs-2">パスワード変更</h2>
+    <h2 class="my-4 fs-2">パスワード再設定</h2>
     <div class="devise-inner">
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "users/shared/error_messages", model: f.object %>
