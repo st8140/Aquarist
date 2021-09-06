@@ -7,8 +7,8 @@ RSpec.feature "Users", type: :feature do
     scenario "ログインに成功する" do
       visit new_user_session_path
 
-      fill_in 'メールアドレス', with: 'test1@example.com'
-      fill_in 'パスワード', with: 'testuser'
+      fill_in 'user_email', with: 'test1@example.com'
+      fill_in 'user_password', with: 'testuser'
       click_button 'ログイン'
       expect(page).to have_content 'ログインしました'
     end
@@ -16,8 +16,8 @@ RSpec.feature "Users", type: :feature do
     scenario "ログインに失敗する" do
       visit new_user_session_path
 
-      fill_in 'メールアドレス', with: 'test1@example.com'
-      fill_in 'パスワード', with: 'testuser2'
+      fill_in 'user_email', with: 'test1@example.com'
+      fill_in 'user_password', with: 'testuser2'
       click_button 'ログイン'
       expect(page).to have_content 'パスワードが違います'
     end
@@ -62,7 +62,7 @@ RSpec.feature "Users", type: :feature do
       fill_in 'user_introduction', with: 'テストテスト'
       fill_in 'user_current_password', with: ''
       click_on '更新'
-      expect(page).to have_content '1 件のエラーが発生したため ユーザー は保存されませんでした。'
+      expect(page).to have_content '現在のパスワードを入力してください'
     end
 
     scenario "ユーザーの削除", js: true do

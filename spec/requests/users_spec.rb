@@ -107,4 +107,27 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "GET /users/password/new" do
+    it "パスワード再設定送信画面の表示に成功すること" do
+      get new_user_password_path
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe "GET /users/password/edit" do
+    before do
+      @token = Faker::Internet.password
+      user.reset_password_token = Devise.token_generator.digest(self, :reset_password_token, @token)
+      user.reset_password_sent_at = Time.now
+      user.save!
+    end
+
+    it "パスワード再設定画面の表示に成功すること" do
+      get "#{edit_user_password_path}?reset_password_token=#{@token}"
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+  end
+
 end

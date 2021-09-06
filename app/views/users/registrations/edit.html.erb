@@ -6,7 +6,7 @@
 
     <div class="devise-inner">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "users/shared/error_messages", resource: resource %>
+        <%= render "users/shared/error_messages", model: f.object %>
 
         <div class="field mt-5">
           <%= f.label :name %><br />

@@ -6,6 +6,9 @@
     <li class="nav-item">
       <%= link_to "新規投稿", new_aquarium_path, class: "nav-link", remote: true %>
     </li>
+    <li class="nav-item ">
+      <%= render 'search_field', q: @q, url: search_aquaria_path %>
+    </li>
   </ul>
 </div>
 <div class="col-lg-2 bg-color d-lg-none nav-sp">
@@ -15,6 +18,15 @@
     </li>
     <li class="nav-item">
       <%= link_to "新規投稿", new_aquarium_path, class: "nav-link", remote: true %>
+    </li>
+    <li class="nav-item search-li">
+      <%= search_form_for @q, url: search_aquaria_path do |f| %>
+        <div class="search-field">
+          <%= f.search_field :aquarium_introduction_cont, class: "form-control", placeholder: '投稿検索' %>
+          <i class="fas fa-search"></i>
+        </div>
+        <%= f.submit class: "d-none" %>
+      <% end %>
     </li>
   </ul>
 </div>

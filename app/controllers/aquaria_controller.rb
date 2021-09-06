@@ -1,5 +1,6 @@
 class AquariaController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_q, only: [:index, :search]
 
   def index
     @aquarium = Aquarium.new
@@ -60,7 +61,16 @@ class AquariaController < ApplicationController
     redirect_to aquaria_path
   end
 
+  def search
+    @results = @q.result.order(created_at: :desc)
+    @count = @results.count
+  end
+
   private
+
+  def set_q
+    @q = Aquarium.ransack(params[:q])
+  end
 
   def aquarium_params
     params.require(:aquarium).permit(:aquarium_introduction, :aquarium_image, :user_id)

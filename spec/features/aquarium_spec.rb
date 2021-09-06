@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Aquaria", type: :feature do
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
-  given!(:aquarium) { create(:aquarium, user_id: user.id) }
+  given!(:aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "this is a test introduction") }
 
   background do
     sign_in user
@@ -100,7 +100,7 @@ RSpec.feature "Aquaria", type: :feature do
   feature "current_user.id != aquarium.user_idの場合" do
     background do
       sign_in other_user
-      visit aquarium_path(user.id)
+      visit aquarium_path(aquarium)
     end
 
     scenario "編集リンクが表示されない" do
@@ -109,6 +109,22 @@ RSpec.feature "Aquaria", type: :feature do
 
     scenario "削除リンクが表示されない" do
       expect(page).to_not have_css '#delete-button'
+    end
+  end
+
+  feature "投稿検索の検証" do
+    given!(:other_aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "other introduction") }
+
+    scenario "あいまい検索に成功する", js: true do
+      fill_in 'aquarium-search', with: 'this'
+      find('#aquarium-search').native.send_key(:enter)
+      expect(page).to have_content 'this is a test introduction'
+    end
+
+    scenario "フルワードでの検索に成功する", js: true do
+      fill_in 'aquarium-search', with: 'other introduction'
+      find('#aquarium-search').native.send_key(:enter)
+      expect(page).to have_content 'other introduction'
     end
   end
 

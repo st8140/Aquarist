@@ -28,10 +28,12 @@
           </div>
           
           <div class="col-lg-3 col-sm-12">
-            <% if aquarium.persisted? && aquarium.aquarium_image? %>
-              <%= link_to image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
-            <% else %>
-              <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
+            <%= link_to aquarium_path(aquarium) do %>
+              <% if aquarium.persisted? && aquarium.aquarium_image? %>
+                <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail img-hover") %>
+              <% else %>
+                <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail img-hover") %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -61,7 +63,7 @@
               <%= render partial: "likes/like", locals: {aquarium: aquarium} %>
             </div>
 
-            <div class="comment-count">
+            <div class="comment-count mb-2">
               <%= link_to aquarium_path(aquarium, anchor: "comment-form"), class: "comment-link" do %>
                 <span class="far fa-comment-dots"></span>
                 <%= aquarium.comments.count %>
@@ -69,11 +71,12 @@
             </div>
           </div>
         </div>
-
-          <% if aquarium.persisted? && aquarium.aquarium_image? %>
-            <%= link_to image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
-          <% else %>
-            <%= link_to image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail aquarium-image"), aquarium_path(aquarium) %>
+          <%= link_to aquarium_path(aquarium) do %>
+            <% if aquarium.persisted? && aquarium.aquarium_image? %>
+              <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+            <% else %>
+              <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+            <% end %>
           <% end %>
       </div>
     </div>

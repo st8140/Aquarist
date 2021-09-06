@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
-    :sessions => 'users/sessions'   
+    :sessions => 'users/sessions',
+    :passwords => 'users/passwords',
+    :mailer => 'users/mailer'
   } 
 
   devise_scope :user do
@@ -17,6 +19,9 @@ Rails.application.routes.draw do
   root 'home#top'
   get '/' => 'home#top'
   resources :aquaria do
+    collection do
+      get 'search'
+    end
     resource :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :edit, :update, :destroy]
   end

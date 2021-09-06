@@ -1,4 +1,4 @@
-<%= provide(:title, "sign_up") %>
+<%= provide(:title, "アカウント登録") %>
 
 <div class="container devise">
   <div class="devise-form">
@@ -6,22 +6,24 @@
 
     <div class="devise-inner">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <div class="field form-row mt-5">
+      <%= render "users/shared/error_messages", model: f.object %>
+      
+        <div class="field mt-5">
           <%= f.label :name %>
           <%= f.text_field :name, class: "form-control col-10 px-2", autofocus: true, autocomplete: "name", id: "name_field" %>
         </div>
-        <div class="field form-row">
+        <div class="field">
           <%= f.label :email %>
           <%= f.email_field :email, class: "form-control col-10 px-2", autofocus: true, autocomplete: "email", id: "email_field" %>
         </div>
-        <div class="field form-row">
+        <div class="field">
           <%= f.label :password %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> 文字以上)</em>
           <% end %><br />
           <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "new-password", id: "password_field" %>
         </div>
-        <div class="field form-row">
+        <div class="field">
           <%= f.label :password_confirmation %>
           <%= f.password_field :password, class: "form-control col-10 px-2", autocomplete: "new-password", id: "password_confirmation_field" %>
         </div>
@@ -30,8 +32,6 @@
         </div>
       <% end %>
         <%= link_to "既にアカウントをお持ちの方", log_in_path %>
-        <br>
-        <%= link_to "確認用メールが届きませんか？", new_user_registration_path %>
         <br>
       
     </div>
