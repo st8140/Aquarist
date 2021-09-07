@@ -11,7 +11,7 @@ jobs:
           - BUNDLER_VERSION: 2.0.2
           - RAILS_ENV: 'test'
       - image: circleci/mysql
-      command: [--default-authentication-plugin=mysql_native_password]
+        command: [--default-authentication-plugin=mysql_native_password]
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
@@ -24,22 +24,23 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - checkout
       - run:
-        name: Chrome Driverのインストール
-        command: |
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-          sudo apt-get update && sudo apt-get install -y unzip
-          wget -N http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip -P ~/
-          unzip ~/chromedriver_linux64.zip -d ~/
-          rm ~/chromedriver_linux64.zip
-          sudo chown root:root ~/chromedriver
-          sudo chmod 755 ~/chromedriver
-          sudo mv ~/chromedriver /usr/bin/chromedriver
-          sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -'
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update && sudo apt-get install -y google-chrome-stable
+          name: Chrome Driver Install
+          command: |
+            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            sudo apt-get update && sudo apt-get install -y unzip
+            wget -N http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip -P ~/
+            unzip ~/chromedriver_linux64.zip -d ~/
+            rm ~/chromedriver_linux64.zip
+            sudo chown root:root ~/chromedriver
+            sudo chmod 755 ~/chromedriver
+            sudo mv ~/chromedriver /usr/bin/chromedriver
+            sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -'
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+            sudo apt-get update && sudo apt-get install -y google-chrome-stable
+          background: true
+      - checkout
 
       # Download and cache dependencies
       - restore_cache:
