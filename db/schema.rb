@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_08_09_062155) do
 
-  create_table "aquaria", force: :cascade do |t|
+  create_table "aquaria", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "aquarium_introduction"
     t.string "aquarium_image"
     t.integer "user_id"
@@ -21,26 +21,26 @@ ActiveRecord::Schema.define(version: 2021_08_09_062155) do
     t.string "title"
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "content"
-    t.integer "user_id", null: false
-    t.integer "aquarium_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "aquarium_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["aquarium_id"], name: "index_comments_on_aquarium_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "aquarium_id", null: false
-    t.integer "user_id", null: false
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "aquarium_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["aquarium_id"], name: "index_likes_on_aquarium_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

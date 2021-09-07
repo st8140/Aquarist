@@ -186,6 +186,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
+    mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
@@ -332,7 +333,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     ssrf_filter (1.0.7)
     temple (0.8.2)
     thor (1.1.0)
@@ -387,6 +387,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mysql2
   pg (= 1.1.4)
   poltergeist
   pry-byebug
@@ -403,7 +404,6 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   uglifier
