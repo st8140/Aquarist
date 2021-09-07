@@ -49,7 +49,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rubocop-airbnb'
   gem 'rails-controller-testing'
-  gem 'RspecJunitFormatter'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
