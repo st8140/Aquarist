@@ -83,4 +83,18 @@ RSpec.configure do |config|
       FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"])
     end
   end
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
+  end
+
+  config.after do |example|
+    if example.metadata[:type] == :feature and example.exception
+        page.save_screenshot 'screenshot/テスト失敗時スクリーンショット.png'
+    end 
+  end
 end

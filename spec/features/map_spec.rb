@@ -10,7 +10,7 @@ RSpec.feature "Maps", type: :feature do
 
   scenario "近所のアクアショップが表示される", js: true do
     click_on '近所のアクアショップを探す'
-    sleep 5
+    sleep 10
     page.driver.browser.switch_to.alert.accept
     expect(page).to have_selector '.result-box'
   end
