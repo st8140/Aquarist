@@ -109,12 +109,59 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.6.6-node
+        environment:
+          - BUNDLER_VERSION: 2.0.2
+          - RAILS_ENV: 'test'
+          - MYSQL_HOST: 127.0.0.1
+          - MYSQL_USERNAME: 'root'
+          - MYSQL_PASSWORD: ''
+          - MYSQL_PORT: 3306
+      - image: circleci/mysql
+        command: [--default-authentication-plugin=mysql_native_password]
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_HOST: '%'
     working_directory: ~/repo
     steps:
-      - preparate
+      - checkout
+      - run: sudo apt-get update --allow-releaseinfo-change
+      - circleci-images/install-chrome
+      - circleci-images/install-chromedriver
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - restore_cache:
+          keys:
+            - rails-yarn-{{ checksum "yarn.lock" }}
+            - rails-yarn-
       - run:
-          name: Rspec
-          command: bundle exec rspec
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - save_cache:
+          key: rails-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      # Database setup
+      - run: mv config/database.yml.ci config/database.yml 
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      - run:
+          name: yarn install
+          command: yarn install --cache-folder ~/.cache/yarn
+      - run:
+          name: webpack install
+          command: bundle exec bin/webpack
 
   deploy_prd:
     docker:
