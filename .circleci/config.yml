@@ -107,7 +107,7 @@ jobs:
   rubocop:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: /tmp/repo
+    working_directory: ~/repo
     steps:
       - preparate
       - run:
@@ -117,7 +117,7 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: /tmp/repo
+    working_directory: ~/repo
     steps:
       - preparate
       - run: bundle exec rails db:create
@@ -126,55 +126,48 @@ jobs:
           name: Rspec
           command: bundle exec rspec
 
-  deploy_stage:
+  deploy_prd:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: /tmp/repo
+    working_directory: ~/repo
+    parameters:
+      app-name: 
+        default: $HEROKU_APP_NAME_PRD
+        type: string
+      post-deploy:
+        default:
+          - run:
+              command: heroku run rails db:migrate --app $HEROKU_APP_NAME_PRD
+        type: steps
     steps:
       - checkout
-      - run:
-          name: 'Install Heroku CLI, if necessary'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
-      - run:
-          name: heroku maintenance on
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
-      - run:
-          name: Deploy to Heroku_Staging
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STAGE.git master
-      - run:
-          name: heroku maintenance off
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
+      - heroku/install
+      - heroku/deploy-via-git:
+          app-name: << parameters.app-name >>
+      - steps: << parameters.post-deploy >>
 
-  deploy_prod:
+  deploy_stg:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: /tmp/repo
+    working_directory: ~/repo
+    parameters:
+      app-name: 
+        default: $HEROKU_APP_NAME_STG
+        type: string
+      post-deploy:
+        default:
+          - run:
+              command: heroku run rails db:migrate --app $HEROKU_APP_NAME_STG
+        type: steps
+      force:
+        default: true
+        type: boolean
     steps:
       - checkout
-      - run:
-          name: 'Install Heroku CLI, if necessary'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
-      - run:
-          name: heroku maintenance on
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME_PROD}
-      - run:
-          name: Deploy to Heroku_Production
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_PROD.git master
-      - run:
-          name: heroku maintenance off
-          command: heroku maintenance:off --app ${HEROKU_APP_NAME_PROD}
+      - heroku/install
+      - heroku/deploy-via-git:
+          app-name: << parameters.app-name >>
+      - steps: << parameters.post-deploy >>
 
 commands:
   bundle-install:
