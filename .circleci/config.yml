@@ -105,7 +105,6 @@ jobs:
       - run: mv config/database.yml.ci config/database.yml 
 
   rubocop:
-    executor: default
     steps:
       - preparate
       - run:
@@ -113,7 +112,6 @@ jobs:
           command: bundle exec rubocop
 
   rspec:
-    executor: default
     steps:
       - preparate
       - run: bundle exec rails db:create
@@ -123,7 +121,6 @@ jobs:
           command: bundle exec rspec
 
   deploy_prd:
-    executor: heroku/default
     parameters:
       app-name: 
         default: $HEROKU_APP_NAME_PRD
@@ -141,7 +138,6 @@ jobs:
       - steps: << parameters.post-deploy >>
 
   deploy_stg:
-    executor: heroku/default
     parameters:
       app-name: 
         default: $HEROKU_APP_NAME_STG
@@ -177,4 +173,3 @@ commands:
     steps:
       - checkout
       - bundle-install
-      
