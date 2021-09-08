@@ -4,6 +4,8 @@
 #
 version: 2.1
 orbs:
+  ruby-orbs: sue445/ruby-orbs@1.6.0
+  heroku: circleci/heroku@1.0.1
   circleci-images: circleci/circleci-images@0.7.0
 
 workflows:
@@ -88,7 +90,6 @@ jobs:
       - run:
           name: webpack install
           command: bundle exec bin/webpack
-      - run: mv config/database.yml.ci config/database.yml 
 
   rubocop:
     docker:
