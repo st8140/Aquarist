@@ -2,13 +2,12 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
 orbs:
-  ruby-orbs: sue445/ruby-orbs@1.6.0
-  heroku: circleci/heroku@1.0.1
+  circleci-images: circleci/circleci-images@0.7.0
 
 workflows:
-  version: 2
+  version: 2.1
   build_test_and_deploy:
     jobs:
       - build
@@ -39,7 +38,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:2.6.6-node
         environment:
           - BUNDLER_VERSION: 2.0.2
           - RAILS_ENV: 'test'
@@ -52,22 +51,9 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Chrome Driver Install
-          command: |
-            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-            sudo apt-get update && sudo apt-get install -y unzip
-            wget -N http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip -P ~/
-            unzip ~/chromedriver_linux64.zip -d ~/
-            rm ~/chromedriver_linux64.zip
-            sudo chown root:root ~/chromedriver
-            sudo chmod 755 ~/chromedriver
-            sudo mv ~/chromedriver /usr/bin/chromedriver
-            sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -'
-            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-            sudo apt-get update && sudo apt-get install -y google-chrome-stable
-          background: true
+      - run: sudo apt-get update --allow-releaseinfo-change
+      - circleci-images/install-chrome
+      - circleci-images/install-chromedriver
 
       # Download and cache dependencies
       - restore_cache:
@@ -106,7 +92,7 @@ jobs:
 
   rubocop:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:2.6.6-node
     working_directory: ~/repo
     steps:
       - preparate
@@ -116,7 +102,7 @@ jobs:
 
   rspec:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:2.6.6-node
     working_directory: ~/repo
     steps:
       - preparate
@@ -128,7 +114,7 @@ jobs:
 
   deploy_prd:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:2.6.6-node
     working_directory: ~/repo
     parameters:
       app-name: 
@@ -148,7 +134,7 @@ jobs:
 
   deploy_stg:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:2.6.6-node
     working_directory: ~/repo
     parameters:
       app-name: 
@@ -185,4 +171,3 @@ commands:
     steps:
       - checkout
       - bundle-install
-      
