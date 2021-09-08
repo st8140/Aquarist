@@ -67,7 +67,7 @@ RSpec.feature "Users", type: :feature do
 
     scenario "ユーザーの削除", js: true do
       click_on 'アカウント削除'
-      page.driver.browser.switch_to.alert.accept
+      page.accept_confirm
       expect(page).to have_content 'アカウントを削除しました。またのご利用をお待ちしております。'
     end
   end

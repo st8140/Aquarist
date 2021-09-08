@@ -2,6 +2,7 @@ FROM ruby:2.6.6
 RUN apt-get update && apt-get install -y \
     build-essential \
     nodejs
+#choromeの追加
 RUN apt-get update && apt-get install -y unzip && \
     CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
     wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/ && \

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Maps", type: :feature do
+  Capybara.javascript_driver = :selenium_chrome
   given(:user) { create(:user) }
 
   background do
@@ -10,8 +11,8 @@ RSpec.feature "Maps", type: :feature do
 
   scenario "近所のアクアショップが表示される", js: true do
     click_on '近所のアクアショップを探す'
-    sleep 10
-    page.driver.browser.switch_to.alert.accept
+    sleep 5
+    page.accept_confirm
     expect(page).to have_selector '.result-box'
   end
 

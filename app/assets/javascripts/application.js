@@ -64,7 +64,7 @@ function initMap() {
       resultRow.innerHTML = ""
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
-      alert('緯度:' + latitude + ' / 経度:' + longitude);
+      alert('現在位置からショップ検索を行います\n' + '緯度:' + latitude + ' / 経度:' + longitude);
       let latlng = new google.maps.LatLng(latitude, longitude);
       
       // 現在地の緯度軽度を中心にマップ生成
