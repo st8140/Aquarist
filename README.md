@@ -17,4 +17,25 @@
 * RSpec
 * Googl Maps API
 
-#インフラ構成図
+# インフラ構成図
+<img width="799" alt="スクリーンショット 2021-09-08 10 12 10" src="https://user-images.githubusercontent.com/74239438/132429896-c1c0aee1-a4ad-4134-8fc8-37140f10ed5f.png">
+
+* GitHubへのpush時にRSpec&Rubocopが自動で実行されます。
+* RSpecとRubocopが成功した場合、Herokuへ自動デプロイされます。
+
+
+# 機能一覧
+* ユーザー登録、ログイン機能(devise)
+* 投稿機能
+* いいね機能(Ajax)
+* コメント機能(Ajax)
+* 投稿検索機能(ransack)
+* ショップ検索機能(Google Maps API)  
+  1.位置情報検索(geocorder,geolocation)  
+  2.ショップ情報検索(Place API)  
+  
+# テスト
+* Rspec  
+  1.model  
+  2.request  
+  3.feature  
