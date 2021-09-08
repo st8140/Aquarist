@@ -162,6 +162,9 @@ jobs:
       - run:
           name: webpack install
           command: bundle exec bin/webpack
+      - run:
+          name: Rspec
+          command: bundle exec rspec
 
   deploy_prd:
     docker:
