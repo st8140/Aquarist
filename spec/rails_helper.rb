@@ -33,7 +33,6 @@ end
 # require only the support files necessary.
 #
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
-
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -90,5 +89,12 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
+  end
+  
+  # Run system test in headless mode
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      driven_by :selenium, using: :headless_chrome, screen_size: [1280, 800], options: { args: ["headless", "disable-gpu", "no-sandbox", "disable-dev-shm-usage"] }
+    end
   end
 end
