@@ -3,6 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
+
 jobs:
   build:
     docker:
@@ -13,18 +14,13 @@ jobs:
       - image: circleci/mysql
         command: [--default-authentication-plugin=mysql_native_password]
         environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          - MYSQL_ROOT_HOST: '%'
+          - MYSQL_USER: root
+          - MYSQL_DB: ci_test
+          - MYSQL_ROOT_HOST: "127.0.0.1"
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
+    working_directory: ~/aquarist
 
     steps:
-      - checkout
       - run:
           name: Chrome Driver Install
           command: |
@@ -42,79 +38,56 @@ jobs:
             sudo apt-get update && sudo apt-get install -y google-chrome-stable
           background: true
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      - checkout
 
       - restore_cache:
           keys:
-            - rails-yarn-{{ checksum "yarn.lock" }}
-            - rails-yarn-
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
 
       - run:
           name: install dependencies
           command: |
-            gem install bundler -v 2.1.4
+            gem install bundler -v 2.0.2
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - save_cache:
-          key: rails-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-
-      # Database setup
+      - run: mv config/database.yml.ci config/database.yml
+      - run: yarn install
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-
-      - run:
-          name: yarn install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      - run:
-          name: webpack install
-          command: bundle exec bin/webpack
-
-      - run: mv config/database.yml.ci config/database.yml 
 
       - run:
           name: Rubocop
           command: bundle exec rubocop
 
-      # run tests!
       - run:
-          name: run tests
+          name: Rspec
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
               circleci tests split --split-by=timings)"
-
-
             bundle exec rspec \
-              --format progress \
               --format RspecJunitFormatter \
               --out /tmp/test-results/rspec.xml \
               --format progress \
               $TEST_FILES
+          no_output_timeout: 15m
 
-      # collect reports
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-  
-  deploy_stage:
+
+deploy_stage:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: ~/repo
+    working_directory: /aquarist
     steps:
       - checkout
       - run:
@@ -136,10 +109,10 @@ jobs:
           name: heroku maintenance off
           command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
 
-  deploy_prod:
+deploy_prod:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: ~/repo
+    working_directory: /aquarist
     steps:
       - checkout
       - run:
@@ -160,24 +133,3 @@ jobs:
       - run:
           name: heroku maintenance off
           command: heroku maintenance:off --app ${HEROKU_APP_NAME}
-
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy_stage:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - staging
-      - deploy_prod:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
