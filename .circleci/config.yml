@@ -3,7 +3,6 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
-
 jobs:
   build:
     docker:
@@ -14,13 +13,18 @@ jobs:
       - image: circleci/mysql
         command: [--default-authentication-plugin=mysql_native_password]
         environment:
-          - MYSQL_USER: root
-          - MYSQL_DB: ci_test
-          - MYSQL_ROOT_HOST: "127.0.0.1"
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_HOST: '%'
 
-    working_directory: ~/aquarist
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
 
     steps:
+      - checkout
       - run:
           name: Chrome Driver Install
           command: |
@@ -38,26 +42,43 @@ jobs:
             sudo apt-get update && sudo apt-get install -y google-chrome-stable
           background: true
 
-      - checkout
-
+      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+
+      - restore_cache:
+          keys:
+            - rails-yarn-{{ checksum "yarn.lock" }}
+            - rails-yarn-
 
       - run:
           name: install dependencies
           command: |
-            gem install bundler -v 2.0.2
+            gem install bundler -v 2.1.4
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: プロジェクトローカルにGemをインストールするよう設定
+          command: bundle config set --local path 'vendor/bundle'
+
+      - run:
+          name: yarn install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      - run:
+          name: webpack install
+          command: bundle exec bin/webpack
 
       - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run: mv config/database.yml.ci config/database.yml
-      - run: yarn install
+      - run: mv config/database.yml.ci config/database.yml 
+
+      # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
@@ -65,71 +86,22 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
 
+      # run tests!
       - run:
-          name: Rspec
+          name: run tests
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
               circleci tests split --split-by=timings)"
             bundle exec rspec \
+              --format progress \
               --format RspecJunitFormatter \
               --out /tmp/test-results/rspec.xml \
               --format progress \
               $TEST_FILES
-          no_output_timeout: 15m
-
+      # collect reports
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-deploy_stage:
-    docker:
-      - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: /aquarist
-    steps:
-      - checkout
-      - run:
-          name: 'Install Heroku CLI, if necessary'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
-      - run:
-          name: heroku maintenance on
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
-      - run:
-          name: Deploy to Heroku_Staging
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STAGE.git master
-      - run:
-          name: heroku maintenance off
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGE}
-
-deploy_prod:
-    docker:
-      - image: circleci/ruby:2.6.6-node-browsers
-    working_directory: /aquarist
-    steps:
-      - checkout
-      - run:
-          name: 'Install Heroku CLI, if necessary'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
-      - run:
-          name: heroku maintenance on
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME}
-      - run:
-          name: Deploy to Heroku_Production
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-      - run:
-          name: heroku maintenance off
-          command: heroku maintenance:off --app ${HEROKU_APP_NAME}
