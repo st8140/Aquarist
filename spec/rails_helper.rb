@@ -73,22 +73,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :model
   config.include Devise::Test::IntegrationHelpers, type: :feature
-
-  # system specでheadless chrome使う
-  config.before(:each) do |example|
-    if example.metadata[:type] == :system
-      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400], options: { args: ["headless", "disable-gpu", "no-sandbox", "disable-dev-shm-usage"] }
-    end
-  end
-
-  config.before(:each, type: :system) do
-    driven_by Capybara.default_driver
-  end
-
-  config.before(:each, type: :system, js: true) do
-    driven_by Capybara.javascript_driver
-    host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
-  end
+  config.include Devise::Test::IntegrationHelpers, type: :system
 
   config.before(:each, type: :system) do
     driven_by :rack_test

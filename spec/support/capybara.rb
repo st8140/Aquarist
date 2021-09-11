@@ -1,8 +1,12 @@
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
+Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.default_max_wait_time = 5
+
 Capybara.register_driver :selenium_chrome_headless do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new
+
 
   options.add_argument('--headless')
   options.add_argument('--no-sandbox')
@@ -11,5 +15,3 @@ Capybara.register_driver :selenium_chrome_headless do |app|
 
   driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
-
-Capybara.javascript_driver = :selenium_chrome_headless
