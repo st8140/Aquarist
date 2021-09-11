@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.feature "Homes", type: :feature do
-  background do
+RSpec.describe "Home", type: :system do
+  before do
     visit "/"
   end
 
-  feature "リンクの検証" do
+  describe "リンクの検証" do
     scenario "topリンクが正常であること" do
       expect(page).to have_link 'Aquarist', href: "/"
     end

@@ -186,6 +186,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
+    mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
@@ -280,6 +281,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -332,7 +335,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     ssrf_filter (1.0.7)
     temple (0.8.2)
     thor (1.1.0)
@@ -387,6 +389,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mysql2
   pg (= 1.1.4)
   poltergeist
   pry-byebug
@@ -397,13 +400,13 @@ DEPENDENCIES
   rails-i18n
   ransack
   rspec-rails
+  rspec_junit_formatter
   rubocop-airbnb
   sass-rails (>= 6)
   selenium-webdriver
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   uglifier

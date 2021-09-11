@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-RSpec.feature "Likes", type: :feature do
-  given(:user_1) { create(:user) }
-  given(:user_2) { create(:user) }
-  given!(:aquarium) { create(:aquarium, user_id: user_2.id) }
+RSpec.describe "Like", type: :system do
+  let(:user_1) { create(:user) }
+  let(:user_2) { create(:user) }
+  let!(:aquarium) { create(:aquarium, user_id: user_2.id) }
 
-  background do
+  before do
     sign_in user_1
   end
   
-  feature "投稿一覧画面の検証" do
-    background do
+  describe "投稿一覧画面の検証" do
+    before do
       visit aquaria_path
     end
 
@@ -26,8 +26,8 @@ RSpec.feature "Likes", type: :feature do
     end
   end
 
-  feature "投稿詳細画面の検証" do
-    background do
+  describe "投稿詳細画面の検証" do
+    before do
       visit aquarium_path(aquarium.id)
     end
 
@@ -43,8 +43,8 @@ RSpec.feature "Likes", type: :feature do
     end
   end
 
-  feature "アカウント投稿一覧画面の検証" do
-    background do
+  describe "アカウント投稿一覧画面の検証" do
+    before do
       visit users_posts_path(user_2.id)
     end
 
@@ -60,8 +60,8 @@ RSpec.feature "Likes", type: :feature do
     end
   end
 
-  feature "いいねした投稿画面の検証" do
-    background do
+  describe "いいねした投稿画面の検証" do
+    before do
       @like = Like.create(
         user_id: user_1.id,
         aquarium_id: aquarium.id

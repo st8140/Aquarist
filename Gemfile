@@ -39,7 +39,8 @@ gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3', '~> 1.4'
+  # gem 'sqlite3', '~> 1.4'
+  gem 'mysql2'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -48,6 +49,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rubocop-airbnb'
   gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do

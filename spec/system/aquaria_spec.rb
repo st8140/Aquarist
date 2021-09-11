@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-RSpec.feature "Aquaria", type: :feature do
-  given(:user) { create(:user) }
-  given(:other_user) { create(:user) }
-  given!(:aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "this is a test introduction") }
+RSpec.describe "Aquarium", type: :system do
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let!(:aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "this is a test introduction") }
 
-  background do
+  before do
     sign_in user
     visit aquaria_path
   end
 
-  feature "投稿一覧ページ、リンク先の検証" do
+  describe "投稿一覧ページ、リンク先の検証" do
     scenario "アカウント詳細リンクが正常であること" do
       expect(page).to have_link user.name, href: detail_path(user)
     end
@@ -28,14 +28,14 @@ RSpec.feature "Aquaria", type: :feature do
     end
   end
 
-  feature "投稿詳細ページ、リンク先の検証" do
-    given(:other_user) { create(:user, name: 'other_user') }
-    given!(:like) { create(:like, aquarium_id: aquarium.id, user_id: other_user.id) }
-    background do
+  describe "投稿詳細ページ、リンク先の検証" do
+    let(:other_user) { create(:user, name: 'other_user') }
+    let!(:like) { create(:like, aquarium_id: aquarium.id, user_id: other_user.id) }
+    before do
       visit aquarium_path(aquarium)
     end
 
-    scenario "アカウント詳細リンクが正常" do
+    scenario "アカウント詳細リンクが正常であること" do
       expect(page).to have_link user.name, href: detail_path(user)
     end
 
@@ -45,7 +45,7 @@ RSpec.feature "Aquaria", type: :feature do
     end
   end
 
-  feature "新規投稿の検証" do
+  describe "新規投稿の検証" do
     scenario "新規投稿に成功する", js: true do
       click_on '新規投稿'
       fill_in 'aquarium_aquarium_introduction', with: 'テスト'
@@ -64,8 +64,8 @@ RSpec.feature "Aquaria", type: :feature do
     end
   end
 
-  feature "投稿編集の検証" do
-    background do
+  describe "投稿編集の検証" do
+    before do
       click_on 'aquarium_image'
     end
 
@@ -85,8 +85,8 @@ RSpec.feature "Aquaria", type: :feature do
     end
   end
 
-  feature "投稿削除の検証" do
-    background do
+  describe "投稿削除の検証" do
+    before do
       visit aquarium_path(aquarium)
     end
 
@@ -97,8 +97,8 @@ RSpec.feature "Aquaria", type: :feature do
     end
   end
 
-  feature "current_user.id != aquarium.user_idの場合" do
-    background do
+  describe "current_user.id != aquarium.user_idの場合" do
+    before do
       sign_in other_user
       visit aquarium_path(aquarium)
     end
@@ -112,8 +112,8 @@ RSpec.feature "Aquaria", type: :feature do
     end
   end
 
-  feature "投稿検索の検証" do
-    given!(:other_aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "other introduction") }
+  describe "投稿検索の検証" do
+    let!(:other_aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "other introduction") }
 
     scenario "あいまい検索に成功する", js: true do
       fill_in 'aquarium-search', with: 'this'

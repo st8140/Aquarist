@@ -9,16 +9,6 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
-
-Capybara.register_driver :sp_driver do |app|
-  useragent = "sp"
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chrome_options: {
-      args: %W(headless disable-gpu window-size=990,367 user-agent=#{useragent})
-    }
-  )
-  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
-end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -31,17 +21,23 @@ end
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+# spec/supportの下読み込み
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
+
+# Capybara設定
+Capybara.server = :puma, { Silent: true }
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -77,10 +73,13 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :model
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :system
 
-  config.after(:all) do
-    if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"])
-    end
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
   end
 end

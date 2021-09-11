@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.feature "Users", type: :feature do
-  given!(:user) { create(:user, email: 'test1@example.com', password: 'testuser') }
+RSpec.describe "User", type: :system do
+  let!(:user) { create(:user, email: 'test1@example.com', password: 'testuser') }
 
-  background do
+  before do
     ActionMailer::Base.deliveries.clear
   end
 
@@ -15,9 +15,9 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content 'パスワードの再設定について数分以内にメールでご連絡いたします。'
   end
 
-  feature "パスワード再設定画面の検証" do
+  describe "パスワード再設定画面の検証" do
     shared_context '期限内のtoken作成' do
-      background do
+      before do
         @token = Faker::Internet.password
         user.reset_password_token = Devise.token_generator.digest(self, :reset_password_token, @token)
         user.reset_password_sent_at = Time.now
@@ -26,7 +26,7 @@ RSpec.feature "Users", type: :feature do
     end
 
     shared_context '期限切れのtoken作成' do
-      background do
+      before do
         @token = Faker::Internet.password
         user.reset_password_token = Devise.token_generator.digest(self, :reset_password_token, @token)
         user.reset_password_sent_at = 2000-01-01

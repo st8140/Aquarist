@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.feature "Users", type: :feature do
-  given!(:user) { create(:user, email: 'test1@example.com', password: 'testuser') }
+RSpec.describe "User", type: :system do
+  let!(:user) { create(:user, email: 'test1@example.com', password: 'testuser') }
 
-  feature "ログインとログアウトの検証" do
+  describe "ログインとログアウトの検証" do
     scenario "ログインに成功する" do
       visit new_user_session_path
 
@@ -23,8 +23,8 @@ RSpec.feature "Users", type: :feature do
     end
 
     scenario "ログアウトする", js: true do 
-        sign_in user
-        visit aquaria_path
+      sign_in user
+      visit aquaria_path
 
       find("#current_user").click
       click_on 'ログアウト'
@@ -45,8 +45,8 @@ RSpec.feature "Users", type: :feature do
 
   
   
-  feature "ユーザー編集、削除の検証" do
-    background do
+  describe "ユーザー編集、削除の検証" do
+    before do
       sign_in user
       visit edit_user_registration_path
     end
@@ -67,7 +67,7 @@ RSpec.feature "Users", type: :feature do
 
     scenario "ユーザーの削除", js: true do
       click_on 'アカウント削除'
-      page.driver.browser.switch_to.alert.accept
+      page.accept_confirm
       expect(page).to have_content 'アカウントを削除しました。またのご利用をお待ちしております。'
     end
   end
