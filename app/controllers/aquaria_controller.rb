@@ -4,7 +4,7 @@ class AquariaController < ApplicationController
 
   def index
     @aquarium = Aquarium.new
-    @aquaria = Aquarium.all.order(created_at: :desc)
+    @aquaria = Aquarium.all.order(created_at: :desc).page(params[:page]).per(15)
     @like = Like.new
   end
 
@@ -62,7 +62,7 @@ class AquariaController < ApplicationController
   end
 
   def search
-    @results = @q.result.order(created_at: :desc)
+    @results = @q.result.order(created_at: :desc).page(params[:page]).per(1)
     @count = @results.count
   end
 

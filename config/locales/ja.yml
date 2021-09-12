@@ -7,8 +7,6 @@ ja:
       created_at: 作成日
       updated_at: 更新日
     
-
-    attributes:
       comment:
         content: "コメント"
         
@@ -51,5 +49,10 @@ ja:
       x_years:
         one: 1年
         other: "%{count}年"
-
-        
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."     

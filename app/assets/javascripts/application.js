@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function(){
 
 // ------------------------------------------ navbar ------------------------------------------ //
   $('#user-nav-pc li a').each(function(){
-    var $href = $(this).attr('href');
+    let $href = $(this).attr('href');
     if(location.href.match($href)) {
       $(this).addClass('active');
       } else {
@@ -20,7 +20,7 @@ $(document).on('turbolinks:load', function(){
   });
   
   $('#user-nav-sp li a').each(function(){
-    var $href = $(this).attr('href');
+    let $href = $(this).attr('href');
     if(location.href.match($href)) {
       $(this).addClass('active');
     } else {
@@ -30,15 +30,14 @@ $(document).on('turbolinks:load', function(){
 
 // ------------------------------------------ .flash ------------------------------------------ //
   $('.flash').fadeOut(4000);
+  
 });
-
 
 // ------------------------------------------ maps/index ------------------------------------------ //
 function initMap() {
-  'use strict';
 
   let target = document.getElementById('target');
-  var geocoder = new google.maps.Geocoder();
+  let geocoder = new google.maps.Geocoder();
   let map;
   let tokyo = {lat: 35.681167, lng: 139.767052};
   let service;

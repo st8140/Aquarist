@@ -5,9 +5,10 @@
   <div class="row">
     <%= render "navbar" %>
     <div class="p-4 bg-color">
-      <div class="row">
+      <div class="row scroll-list jscroll">
         <%= render partial: "posts", collection: @aquaria, as: "aquarium" %>
       </div>
     </div>
   </div>
 </div>
+<%= paginate @aquaria %>
