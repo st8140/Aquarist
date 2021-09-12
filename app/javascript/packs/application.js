@@ -8,7 +8,6 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require('jquery.jscroll.min.js')
 
 var jQuery = require('jquery')
 global.$ = global.jQuery = jQuery;
