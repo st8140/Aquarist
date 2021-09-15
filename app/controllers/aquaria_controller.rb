@@ -62,7 +62,7 @@ class AquariaController < ApplicationController
   end
 
   def search
-    @results = @q.result.order(created_at: :desc).page(params[:page]).per(1)
+    @results = @q.result.order(created_at: :desc).page(params[:page]).per(24)
     @count = @results.count
   end
 

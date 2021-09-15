@@ -165,8 +165,11 @@ jobs:
       - run:
           name: Rspec
           command: bundle exec rspec
+      - store_test_results:
+          path: test_results
+
       - store_artifacts:
-          path: tmp/capybara/
+          path: result.json
 
   deploy_prd:
     docker:

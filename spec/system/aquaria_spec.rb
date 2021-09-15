@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Aquarium", type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
+  let!(:aquaria) { create_list(:aquarium, 15) }
   let!(:aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "this is a test introduction") }
 
   before do
@@ -66,7 +67,7 @@ RSpec.describe "Aquarium", type: :system do
 
   describe "投稿編集の検証" do
     before do
-      click_on 'aquarium_image'
+      visit aquarium_path(aquarium)
     end
 
     scenario "更新に成功する", js: true do
@@ -125,6 +126,23 @@ RSpec.describe "Aquarium", type: :system do
       fill_in 'aquarium-search', with: 'other introduction'
       find('#aquarium-search').native.send_key(:enter)
       expect(page).to have_content 'other introduction'
+    end
+  end
+
+  describe "ページネーションの検証" do
+    scenario "ページネーションが表示される" do
+      expect(page).to have_css '.pagination'
+    end
+    
+    scenario "次のページが表示される" do
+      click_link '2'
+      expect(URI.parse(current_url).query).to eq "page=2"
+    end
+
+    scenario "前のページに戻れる" do
+      visit '/aquaria?page=2'
+      click_link '1'
+      expect(URI.parse(current_url).query).to eq nil
     end
   end
 
