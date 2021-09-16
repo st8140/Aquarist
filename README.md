@@ -21,7 +21,7 @@
 <img width="799" alt="スクリーンショット 2021-09-08 10 12 10" src="https://user-images.githubusercontent.com/74239438/132429896-c1c0aee1-a4ad-4134-8fc8-37140f10ed5f.png">
 
 * GitHubへのpush時にRSpec&Rubocopが自動で実行されます。
-* RSpecとRubocopが成功した場合、Herokuへ自動デプロイされます。
+* masterへのpush時、RSpecとRubocopが成功した場合はHerokuへ自動デプロイされます。
 
 
 # 機能一覧
@@ -38,4 +38,4 @@
 * Rspec  
   1.model  
   2.request  
-  3.feature  
+  3.system  
