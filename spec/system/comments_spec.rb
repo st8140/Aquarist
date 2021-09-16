@@ -15,7 +15,7 @@ RSpec.describe "Comment", type: :system do
   end
 
   describe "コメント新規投稿の検証" do
-    scenario "新規投稿に成功する", js: true do
+    scenario "新規投稿に成功する", js: true, vcr: true do
       fill_in 'comment_content', with: 'テスト'
       click_on 'コメントを投稿'
       expect {
@@ -23,7 +23,7 @@ RSpec.describe "Comment", type: :system do
       }
     end
 
-    scenario "新規投稿に失敗する", js: true do
+    scenario "新規投稿に失敗する", js: true, vcr: true do
       fill_in 'comment_content', with: ''
       click_on 'コメントを投稿'
       expect(page).to have_content 'コメントを入力してください'
@@ -31,13 +31,11 @@ RSpec.describe "Comment", type: :system do
   end
   
   describe "コメント削除の検証" do
-    scenario "削除に成功する", js: true do
+    scenario "削除に成功する", js: true, vcr: true do
       click_on 'もっと見る....'
       find('#comment-delete-btn-cl').click
-      expect {
-        page.accept_confirm "本当にコメントを削除しますか？"
-        expect(page).to change(Comment, :count).by(-1)
-      }
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content 'コメントを削除しました'
     end
 
     context "current_user.id != comment.user_idの場合" do
@@ -53,13 +51,13 @@ RSpec.describe "Comment", type: :system do
 
 
   describe "コメント表示の検証" do
-    context "3件以上コメントがある場合" do
+    context "3件以上コメントがある場合", js: true, vcr: true do
 
-      scenario "表示ボタンを押さなければ表示されない", js: true do
+      scenario "表示ボタンを押さなければ表示されない" do
         expect(page).to_not have_content 'テストコメント'
       end
 
-      scenario "表示ボタンを押すと表示される", js: true do
+      scenario "表示ボタンを押すと表示される" do
         click_on 'もっと見る....'
         expect(page).to have_content 'テストコメント'
       end
