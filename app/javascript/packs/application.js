@@ -21,3 +21,4 @@ window.$ = window.jQuery = jQuery;
 // const imagePath = (name) => images(name, true)
 
 //= require_tree .
+

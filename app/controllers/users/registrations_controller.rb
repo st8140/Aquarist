@@ -13,10 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def user_posts
     @user = User.find(params[:id])
     @aquarium = Aquarium.new
+    @aquaria = @user.aquaria.order(created_at: :desc).page(params[:page]).per(15)
   end
 
   def liked_aquaria
     @user = User.find(params[:id])
+    @liked_aquaria = @user.liked_aquaria.order(created_at: :desc).page(params[:page]).per(15)
   end
   # GET /resource/sign_up
   # def new

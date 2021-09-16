@@ -14,12 +14,12 @@ RSpec.describe "Like", type: :system do
       visit aquaria_path
     end
 
-    scenario "新規いいねに成功する", js: true do
+    scenario "新規いいねに成功する", js: true, vcr: true do
       find('.unlike-btn').click
       expect(page).to have_selector '.likes-count', text: '1'
     end
     
-    scenario "いいねの取り消しに成功する", js: true do
+    scenario "いいねの取り消しに成功する", js: true, vcr: true do
       find('.unlike-btn').click
       find('.like-btn').click
       expect(page).to have_selector '.likes-count', text: '0'
@@ -48,12 +48,12 @@ RSpec.describe "Like", type: :system do
       visit users_posts_path(user_2.id)
     end
 
-    scenario "新規いいねに成功する", js: true do
+    scenario "新規いいねに成功する", js: true, vcr: true do
       find('.unlike-btn').click
       expect(page).to have_selector '.likes-count', text: '1'
     end
     
-    scenario "いいねの取り消しに成功する", js: true do
+    scenario "いいねの取り消しに成功する", js: true, vcr: true do
       find('.unlike-btn').click
       find('.like-btn').click
       expect(page).to have_selector '.likes-count', text: '0'

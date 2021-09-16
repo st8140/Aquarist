@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Aquarium", type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
+  let!(:aquaria) { create_list(:aquarium, 15) }
   let!(:aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "this is a test introduction") }
 
   before do
@@ -39,14 +40,14 @@ RSpec.describe "Aquarium", type: :system do
       expect(page).to have_link user.name, href: detail_path(user)
     end
 
-    scenario "いいねしたユーザーmodalが表示される", js: true do
+    scenario "いいねしたユーザーmodalが表示される", js: true, vcr: true do
       find('.like-user').click
       expect(page).to have_content('other_user')
     end
   end
 
   describe "新規投稿の検証" do
-    scenario "新規投稿に成功する", js: true do
+    scenario "新規投稿に成功する", js: true, vcr: true do
       click_on '新規投稿'
       fill_in 'aquarium_aquarium_introduction', with: 'テスト'
       attach_file '画像', "#{Rails.root}/spec/fixtures/test.jpg"
@@ -56,7 +57,7 @@ RSpec.describe "Aquarium", type: :system do
       }
     end
   
-    scenario "新規投稿に失敗する", js: true do
+    scenario "新規投稿に失敗する", js: true, vcr: true do
       click_on '新規投稿'
       click_button '投稿する'
       expect(page).to have_content '投稿内容を入力してください'
@@ -66,10 +67,10 @@ RSpec.describe "Aquarium", type: :system do
 
   describe "投稿編集の検証" do
     before do
-      click_on 'aquarium_image'
+      visit aquarium_path(aquarium)
     end
 
-    scenario "更新に成功する", js: true do
+    scenario "更新に成功する", js: true, vcr: true do
       find('#edit-button').click
       fill_in 'message-text', with: 'テスト'
       attach_file '画像', "#{Rails.root}/spec/fixtures/test.jpg"
@@ -77,7 +78,7 @@ RSpec.describe "Aquarium", type: :system do
       expect(page).to have_content '投稿を更新しました'
     end
   
-    scenario "更新に失敗する", js: true do
+    scenario "更新に失敗する", js: true, vcr: true do
       find('#edit-button').click
       fill_in 'message-text', with: nil
       click_button '更新する'
@@ -90,7 +91,7 @@ RSpec.describe "Aquarium", type: :system do
       visit aquarium_path(aquarium)
     end
 
-    scenario "削除に成功する", js:true do
+    scenario "削除に成功する", js: true, vcr: true do
       find('#delete-button').click
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content '投稿を削除しました'
@@ -115,16 +116,33 @@ RSpec.describe "Aquarium", type: :system do
   describe "投稿検索の検証" do
     let!(:other_aquarium) { create(:aquarium, user_id: user.id, aquarium_introduction: "other introduction") }
 
-    scenario "あいまい検索に成功する", js: true do
+    scenario "あいまい検索に成功する", js: true, vcr: true do
       fill_in 'aquarium-search', with: 'this'
       find('#aquarium-search').native.send_key(:enter)
       expect(page).to have_content 'this is a test introduction'
     end
 
-    scenario "フルワードでの検索に成功する", js: true do
+    scenario "フルワードでの検索に成功する", js: true, vcr: true do
       fill_in 'aquarium-search', with: 'other introduction'
       find('#aquarium-search').native.send_key(:enter)
       expect(page).to have_content 'other introduction'
+    end
+  end
+
+  describe "ページネーションの検証" do
+    scenario "ページネーションが表示される" do
+      expect(page).to have_css '.pagination'
+    end
+    
+    scenario "次のページが表示される" do
+      click_link '2'
+      expect(URI.parse(current_url).query).to eq "page=2"
+    end
+
+    scenario "前のページに戻れる" do
+      visit '/aquaria?page=2'
+      click_link '1'
+      expect(URI.parse(current_url).query).to eq nil
     end
   end
 
