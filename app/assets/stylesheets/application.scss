@@ -208,6 +208,25 @@ a.nav-link.me-4 {
   }
 }
 
+#user-nav-pc {
+  height: 60px;
+  border-top: 1px solid #ddd;
+
+  .nav-item {
+    position: relative;
+
+    .nav-link {
+      position: absolute;
+      top: 10px;
+
+      &.active {
+        border-bottom: 3px solid #4a90e2;
+        border-right: none;
+      }
+    }
+  }
+}
+
 #user-nav-sp {
   .nav-item a.nav-link.active {
     border: initial;
@@ -235,12 +254,32 @@ a.nav-link.me-4 {
   }
 }
 
+@media screen and (max-width: 768px) {
+  #user-nav-pc {
+    height: initial;
+
+    .nav-item {
+      .nav-link {
+        position: initial;
+      }
+    }
+  }
+}
+
 @media screen and (max-width:457px) {
   .nav-sp-flame {
 
     .search-li {
       margin-left: initial;
       width: 130px;
+    }
+  }
+
+  #user-nav-pc {
+    .nav-item {
+      .nav-link {
+        font-size: 10px;
+      }
     }
   }
 }
@@ -514,11 +553,115 @@ a.nav-link.me-4 {
 
 // ------------------------------------------ users/registrations/detail ------------------------------------------ //
 
+.user-profile {
+  margin: 0 auto;
+  
+}
+
+.profile-background-container {
+  text-align: center;
+}
+
+.profile-background-image {
+  width: 100%;
+  height: 100vh;
+}
+
+.follow-btn {
+  border: 1px solid #00bfff;
+  border-radius: 16px;
+  color: #00bfff !important;
+  width: 140px;
+  margin-top: 5px;
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+.following {
+  background-color: rgba(0, 191, 255, 0.8);
+  color: #fff !important;
+
+  span {
+    margin-left: initial;
+  }
+}
+
+.user-photo-name {
+  position: relative;
+  top: -100px;
+  left: 30px;
+
+  .col-4 {
+    font-size: 20px;
+    position: absolute;
+    top: 150px;
+    left: 220px;
+  }
+}
+
+.profile-icon {
+  border: 5px solid #fff;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.user-stat {
+  list-style: none;
+  display: flex;
+  margin-top: 20px;
+  padding: initial;
+  text-align: center;
+  justify-content: end;
+
+  li {
+    position: relative;
+    border-right: 1px solid #ddd;
+    padding: 0 10px;
+
+    &:first-child {
+      padding: 0 20px;
+    }
+
+    a {
+      color: #222;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.user-info {
+  padding: 30px;
+}
+
+.user-edit {
+  color: #fff !important;
+  margin-top: 5px;
+}
+
 
 a.nav-link.active {
   color: #4a90e2;
   font-size: 19px;
 }
+
+.xs-block {
+  display: none;
+}
+
+.post-count {
+  width: 100px;
+}
+
 
 .user {
   .user-detail-box {
@@ -538,7 +681,7 @@ a.nav-link.active {
   height: 100px;
 
   label {
-    margin-top: 40px;
+    margin-top: 20px;
   }
 }
 
@@ -568,6 +711,51 @@ label.col-md-5.user-icon {
     margin-top: initial;
   }
 
+}
+
+@media screen and (max-width: 768px) {
+  .user-stat {
+    margin-top: 30px;
+    margin-bottom: initial;
+  }
+  .user-stat {
+    li {
+      font-size: 14px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 576px) {
+  .user-photo-name {
+    top: -70px;
+    left: 0;
+
+    .col-4 {
+      top: 100px;
+      left: 180px;
+      font-size: 15px;
+    }
+  }
+
+  .profile-background-image {
+    height: initial;
+  }
+
+  .profile-icon {
+    width: 150px;
+    height: 150px;
+  }
+
+  .xs-block {
+    display: block;
+  }
+
+  .user-stat {
+    li {
+      font-size: 14px;
+    }
+  }
 }
 
 // ------------------------------------------ users/edit ------------------------------------------ //
@@ -848,3 +1036,56 @@ td.d-lg-none.user-post-sp {
     margin-left: initial;
   }
 }
+
+// ------------------------------------------ users/follow ------------------------------------------ //
+
+.follow-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.follow-list {
+  padding: 50px;
+
+  li {
+    list-style: none;
+
+    a {
+      color: #222;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    .col-sm-2 {
+      margin-right: 50px;
+    }
+  }
+
+  .self-introduction {
+    font-size: 14px;
+  }
+
+  .follow-list-btn {
+    text-align: end;
+
+    p {
+      font-size: 12px;
+      color: #bbb;
+      margin-bottom: initial;
+      margin-top: 15px;
+    }
+  }  
+}
+
+@media screen and(max-width:1200px) {
+  .follow-list {
+    li {
+      .col-sm-2 {
+        margin-right: 60px;
+      }
+    }
+  }
+}
+

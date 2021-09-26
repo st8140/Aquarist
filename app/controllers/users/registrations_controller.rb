@@ -20,6 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.find(params[:id])
     @liked_aquaria = @user.liked_aquaria.order(created_at: :desc).page(params[:page]).per(15)
   end
+  
   # GET /resource/sign_up
   # def new
   #   super
@@ -72,11 +73,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    "/users/#{current_user.id}/detail"
+    "/users/#{current_user.id}/posts"
   end
 
   def after_update_path_for(resource)
-    "/users/#{current_user.id}/detail"
+    "/users/#{current_user.id}/posts"
   end
 
   # The path used after sign up for inactive accounts.

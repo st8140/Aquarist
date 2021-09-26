@@ -16,10 +16,10 @@
       </div>
 
       <div class="row p-4 ms-1">
-        <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+        <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", class: "host-icon"), users_posts_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
         <div class="col-lg-7 col-sm-6 ms-5">
           <span>
-            <%= link_to @aquarium.user.name, detail_path(@aquarium.user.id),  class: "user-name" %>
+            <%= link_to @aquarium.user.name, users_posts_path(@aquarium.user.id),  class: "user-name" %>
           </span>
           <br>
           <p class="time-stamp">

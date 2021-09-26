@@ -1,9 +1,9 @@
 <div class="posts-box d-none d-lg-block shadow p-3 mb-5 bg-white rounded">
   <div class="row">
-    <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+    <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), users_posts_path(aquarium.user.id), class: "col-lg-1 col-sm-1" %>
     <div class="col-lg-7 col-sm-6 ms-2">
       <span>
-        <%= link_to aquarium.user.name, detail_path(aquarium.user.id), class: "user-name" %>
+        <%= link_to aquarium.user.name, users_posts_path(aquarium.user.id), class: "user-name" %>
       </span>
       <br>
       <p class="time-stamp">
@@ -39,10 +39,10 @@
 <div class="d-lg-none">
   <div class="posts-sp-box shadow p-3 mb-5 bg-white rounded">
     <div class="row">
-      <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-sm-2 col-3" %>
+      <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), users_posts_path(aquarium.user.id), class: "col-sm-2 col-3" %>
       <div class="col-6">
         <p class="user-name">
-          <%= link_to aquarium.user.name, detail_path(aquarium.user.id) %>
+          <%= link_to aquarium.user.name, users_posts_path(aquarium.user.id) %>
         </p>
         <br>
         <p class="time-stamp">

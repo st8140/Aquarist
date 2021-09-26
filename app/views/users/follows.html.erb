@@ -1,0 +1,27 @@
+<%= provide(:title, "フォロー") %>
+
+<div class="container user py-4 ">
+  <%= render "users/registrations/users_navbar" %>
+  <div class="bg-color shadow p-3 mb-5 bg-white rounded">
+    <ul class="follow-list">
+      <div class="row">
+        <% @users.each do |user| %>
+          <li class="col-lg-4 shadow-sm p-3 mb-5 rounded">
+            <div class="row">
+              <article class="col-sm-2">
+                <%= link_to image_tag(user.user_image.to_s, alt: "user-icon", class: "host-icon follow-icon"), users_posts_path(user.id) %>
+              </article>
+              <article class="col-sm-6 ms-1">
+                <p><%= link_to user.name, users_posts_path(user.id) %></p>
+                <p class="self-introduction"><%= user.introduction %></p>
+              </article>
+              <article class="follow-list-btn" id="followListBtn-<%= user.id %>">
+                <%= render partial: "users/follow_btn", locals: { user: user } %>
+              </article>
+            </div>
+          </li>
+        <% end %>
+      </div>
+    </ul>
+  </div>
+</div>

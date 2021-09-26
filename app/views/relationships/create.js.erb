@@ -1,0 +1,3 @@
+$('#followListBtn-<%= @user.id %>').html("<%= j(render partial: 'users/follow_btn', locals: { user: @user }) %>");
+$('#followerListBtn-<%= @user.id %>').html("<%= j(render partial: 'users/follow_btn', locals: { user: @user }) %>");
+$('#followBtn-<%= @user.id %>').html("<%= j(render partial: 'users/follow_btn', locals: { user: @user }) %>");
