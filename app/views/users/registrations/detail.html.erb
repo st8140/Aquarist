@@ -1,64 +1,76 @@
 <%= provide(:title, "アカウント詳細") %>
-<div class="container user py-4">
-    <%= render "users_navbar" %>
-  <div class="row">
-    <div class="col-md-8 user-detail bg-color shadow p-3 mb-5 bg-white rounded">
-      <div class="user-detail-box">
-        <div class="update-content">
-          <div class="row">
-            <h5 class="detail-heading">アカウント</h5>
-          </div>
-        </div>
-        
-        <div class="update-content">
-          <div class="row">
-            <label class="col-md-5" for="name">名前</label>
-            <div class="col-md-7"><%= @user.name %></div>
-          </div>
-        </div>
 
-        <div class="update-content">
-          <div class="row">
-            <label class="col-md-5 user-icon" for="user_image">プロフィール画像</label>
-            <div class="col-md-7">
-              <%= image_tag(@user.user_image.to_s, alt: "user_image", class: "host-icon") %>
+<div class="detail-container container py-4">
+  <div class="user-profile shadow mb-5 bg-white rounded">
+    <div class="profile-area">
+      <div class="profile-background-container">
+        <% if @user.profile_image? %>
+          <%= image_tag(@user.profile_image.to_s, class: "profile-background-image") %>
+        <% else %>
+          <%= image_tag("profile_default_image", class: "profile-background-image") %>
+        <% end %>
+      </div>
+      <div class="user-photo-name row">
+        <div class="col-2">
+          <%= image_tag(@user.user_image.to_s, alt: "user_image", class: "host-icon profile-icon") %>
+        </div>
+        <h2 class="col-4"><%= @user.name %></h2>
+      </div>
+      <div class="user-info container">
+        <div class="self-introduction">
+          <%= @user.introduction %>
+        </div>
+        <div class="follow-edit-btn">
+          <% if current_user != @user %>
+            <div id="followBtn-<%= @user.id %>">
+              <%= render partial: "users/follow_btn", locals: { user: @user } %>
             </div>
-          </div>
+          <% else %>
+              <%= link_to "プロフィール編集", edit_user_registration_path, class: "user-edit btn btn-primary mx-3" %>
+          <% end %>
         </div>
-
-        <div class="update-content introduction">
-          <div class="row">
-            <label class="col-md-5" for="introduction">自己紹介</label>
-            <div class="col-md-7">
-              <%= @user.introduction %>
-            </div>
-          </div>
-        </div>
-
-        <div class="update-content">
-          <div class="row">
-            <label class="col-md-5" for="email">メールアドレス</label>
-            <div class="col-md-7"><%= @user.email %></div>
-          </div>
-        </div>
-        
-        <div class="update-content">
-          <div class="row">
-            <label class="col-md-5" for="password">パスワード</label>
-            <div class="col-md-7">*********</div>
-          </div>
-        </div>
-        
-        <div class="update-content">
-          <div class="row">
-            <% if @user.id == current_user.id %>
-              <p>
-                <%= link_to "編集", edit_user_registration_path, class: "col-md-2 btn btn-primary mx-3" %>
-              </p>
+        <ul class="user-stat">
+          <li class="post-count">
+            <%= link_to users_posts_path, remote: :true do %>
+              <span><%= @user.aquaria.count %></span><br>
+              投稿
             <% end %>
-          </div>
-        </div>
+          </li>
+          <li>
+            <%= link_to follows_user_path, remote: :true do %>
+              <span class="follows-count" id="followsCount-<%= @user.id %>"><%= render partial: "users/follows_count", locals: { user: @user } %></span><br>
+              フォロー
+            <% end %>
+          </li>
+          <li>
+            <%= link_to followers_user_path, remote: :true do %>
+              <span class="followers-count" id="followersCount-<%= @user.id %>"><%= render partial: "users/followers_count", locals: { user: @user } %></span><br>
+              フォロワー
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
+
+    <div id="app">
+      <ul class="nav nav-fill" id="user-nav-pc">
+        <li class="nav-item">
+          <%= link_to "投稿一覧", users_posts_path, class: "nav-link", remote: :true %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいねした投稿", users_liked_aquaria_path, class: "nav-link", remote: :true %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "フォロー", follows_user_path(@user.id), class: "nav-link follow-link", remote: :true %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "フォロワー", followers_user_path(@user.id), class: "nav-link follower-link", remote: :true %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="detail-container container">
+  <div id="detailContents">
   </div>
 </div>

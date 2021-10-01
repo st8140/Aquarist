@@ -404,7 +404,7 @@ a.nav-link.me-4 {
 }
 
 .show-box {
-  max-width: 880px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
@@ -459,12 +459,14 @@ a.nav-link.me-4 {
 }
 
 
-@media screen and(max-width:576px) {
+@media screen and(max-width:768px) {
   .col-lg-4.text-end {
     position: relative;
     left: -70px;
   }
+}
 
+@media screen and(max-width:576px) {
   .btn-circle {
     right: 20px;
     width: 70px;
@@ -553,6 +555,10 @@ a.nav-link.me-4 {
 
 // ------------------------------------------ users/registrations/detail ------------------------------------------ //
 
+.detail-container {
+  max-width: 1140px;
+}
+
 .user-profile {
   margin: 0 auto;
   
@@ -564,7 +570,7 @@ a.nav-link.me-4 {
 
 .profile-background-image {
   width: 100%;
-  height: 100vh;
+  height: 600px;
 }
 
 .follow-btn {
@@ -579,7 +585,7 @@ a.nav-link.me-4 {
   }
 }
 
-.following {
+.unfollow {
   background-color: rgba(0, 191, 255, 0.8);
   color: #fff !important;
 
@@ -654,65 +660,26 @@ a.nav-link.active {
   font-size: 19px;
 }
 
-.xs-block {
-  display: none;
+.follow-edit-btn {
+  text-align: end;
+  margin: 30px 0;
 }
 
 .post-count {
   width: 100px;
 }
 
-
-.user {
-  .user-detail-box {
-    max-width: 880px;
-    margin: 30px auto;
-  }
-
-  .update-content {
-    border-bottom: 1px solid #eaedef;
-    padding: 20px;
-    margin: 0 15px;
-    font-size: 16px;
-  }
+.container.user.pb-4 {
+  padding-left: initial;
+  padding-right: initial;
 }
 
-.introduction {
-  height: 100px;
-
-  label {
-    margin-top: 20px;
-  }
-}
-
-.col-md-8.user-detail.bg-color {
-  margin: 0 auto;
-  text-align: center;
-}
-
-.detail-heading {
-  font-size: 30px;
-}
-
-label.col-md-5.user-icon {
-  margin-top: 20px;
-}
-
-@media screen and (max-width:992px) {
-  .col-md-8.user-detail.bg-color {
-    width: 880px;
-  }
-
-  .introduction label {
-    margin-top: initial;
-  }
-
-  label.col-md-5.user-icon {
-    margin-top: initial;
+@media screen and (max-width: 1200px) {
+  .user-photo-name {
+    left: initial;
   }
 
 }
-
 @media screen and (max-width: 768px) {
   .user-stat {
     margin-top: 30px;
@@ -745,10 +712,6 @@ label.col-md-5.user-icon {
   .profile-icon {
     width: 150px;
     height: 150px;
-  }
-
-  .xs-block {
-    display: block;
   }
 
   .user-stat {
@@ -792,7 +755,7 @@ td.d-lg-none.user-post-sp {
 }
 
 .user-posts-box {
-  margin: 30px auto;
+  margin: 0px auto;
 }
 
 // ------------------------------------------ new/modal edit/modal ------------------------------------------ //

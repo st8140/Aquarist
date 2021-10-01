@@ -1,0 +1,90 @@
+<div class="modal fade" id="new-modal" tabindex="-1" aria-hidden="true", role="dialog"></div>
+<div class="container user pb-4">
+  <div class="col bg-color user-posts">
+    <% if current_user.id == user.id %>
+      <%= link_to "新規投稿", new_aquarium_path, class: "btn-circle", remote: true %>
+    <% end %>
+
+    <% aquaria.each do |aquarium| %>
+      <div class="posts-box d-none d-lg-block shadow p-3 mb-5 bg-white rounded">
+        <div class="row">
+          <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+          <div class="col-lg-7 col-sm-6 ms-2">
+            <span>
+              <%= link_to aquarium.user.name, detail_path(aquarium.user.id), class: "user-name" %>
+            </span>
+            <br>
+            <p class="time-stamp">
+              <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
+            </p>
+            <p class="introduction pt-2">
+              <%= aquarium.aquarium_introduction %>
+            </p>
+            <div class="likes-buttons" id="likesButtons-<%= aquarium.id %>">
+              <%= render partial: "likes/like", locals: { aquarium: aquarium } %>
+            </div>
+
+            <div class="comment-count">
+              <%= link_to aquarium_path(aquarium, anchor: "comment-form"), class: "comment-link" do %>
+                <span class="far fa-comment-dots"></span>
+              <% end %>
+              <%= aquarium.comments.count %>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-sm-12">
+            <%= link_to aquarium_path(aquarium) do %>
+              <% if aquarium.persisted? && aquarium.aquarium_image? %>
+                <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail img-hover") %>
+              <% else %>
+                <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail img-hover") %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-lg-none">
+        <div class="posts-sp-box shadow p-3 mb-5 bg-white rounded">
+          <div class="row">
+            <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-sm-2 col-3" %>
+            <div class="col-6">
+              <p class="user-name">
+                <%= link_to aquarium.user.name, detail_path(aquarium.user.id) %>
+              </p>
+              <br>
+              <p class="time-stamp">
+                <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <p class="introduction">
+              <%= aquarium.aquarium_introduction %>
+            </p>
+            <div class="like-comment">
+              <div class="likes-buttons" id="likesButtons-sp-<%= aquarium.id %>">
+                <%= render partial: "likes/like", locals: {aquarium: aquarium} %>
+              </div>
+
+              <div class="comment-count mb-2">
+                <%= link_to aquarium_path(aquarium, anchor: "comment-form"), class: "comment-link" do %>
+                  <span class="far fa-comment-dots"></span>
+                  <%= aquarium.comments.count %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <%= link_to aquarium_path(aquarium) do %>
+            <% if aquarium.persisted? && aquarium.aquarium_image? %>
+              <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+            <% else %>
+              <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= paginate aquaria %>

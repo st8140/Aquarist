@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :following
 
   mount_uploader :user_image, UserImageUploader
+  mount_uploader :profile_image, UserImageUploader
+
   validates :name, presence: true
 
   def aquaria
@@ -38,5 +40,4 @@ class User < ApplicationRecord
     # 今自分(引数のuser)がフォローしようとしているユーザーがフォローされているユーザー(passive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     passive_relationships.find_by(following_id: user.id).present?
   end
-  
 end

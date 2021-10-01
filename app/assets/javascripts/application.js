@@ -10,22 +10,27 @@
 $(document).on('turbolinks:load', function(){
 
 // ------------------------------------------ navbar ------------------------------------------ //
-  $('#user-nav-pc li a').each(function(){
-    let $href = $(this).attr('href');
-    if(location.href.match($href)) {
-      $(this).addClass('active');
-      } else {
-        $(this).removeClass('active');
-      }
-  });
+  // $('#user-nav-pc li a').each(function(){
+  //   let $href = $(this).attr('href');
+  //   if(location.href.match($href)) {
+  //     $(this).addClass('active');
+  //     } else {
+  //       $(this).removeClass('active');
+  //     }
+  // });
   
-  $('#user-nav-sp li a').each(function(){
-    let $href = $(this).attr('href');
-    if(location.href.match($href)) {
-      $(this).addClass('active');
-    } else {
-      $(this).removeClass('active');
-    }
+  // $('#user-nav-sp li a').each(function(){
+  //   let $href = $(this).attr('href');
+  //   if(location.href.match($href)) {
+  //     $(this).addClass('active');
+  //   } else {
+  //     $(this).removeClass('active');
+  //   }
+  // });
+
+  $('#user-nav-pc li a').on('click', function(){
+    $('#user-nav-pc li a').removeClass('active');
+    $(this).addClass('active');
   });
 
 // ------------------------------------------ .flash ------------------------------------------ //

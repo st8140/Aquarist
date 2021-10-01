@@ -12,7 +12,7 @@
           <ul>
             <% @liked_users.each do |user| %>
               <li class="like-user-li">
-                <%= link_to users_posts_path(user.id), class: "col-lg-1 col-sm-1" do %>
+                <%= link_to detail_path(user.id), class: "col-lg-1 col-sm-1" do %>
                   <span>
                     <%= image_tag(user.user_image.to_s, alt: "user-icon", class: "host-icon like-user-icon") %>
                   </span>

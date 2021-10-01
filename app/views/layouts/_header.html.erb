@@ -24,13 +24,13 @@
                 <%= current_user.name %>
               </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <li><%= link_to "アカウント", users_posts_path(current_user.id), class: "dropdown-item" %></li>
+                  <li><%= link_to "アカウント", detail_path(current_user.id), class: "dropdown-item" %></li>
                   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                 </ul>
             </li>
           </div>
           <div class="d-lg-none">
-            <li class="nav-item"><%= link_to "アカウント", users_posts_path(current_user.id), class: "nav-account-item" %></li>
+            <li class="nav-item"><%= link_to "アカウント", detail_path(current_user.id), class: "nav-account-item" %></li>
             <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-account-item" %></li>
           </div>
         </ul>
