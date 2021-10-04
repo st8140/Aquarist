@@ -1,0 +1,14 @@
+<% if current_user != user %>
+  <% if user.followed_by?(current_user) %>
+    <%= link_to user_relationships_path(user.id), method: :delete, class: "btn follow-btn unfollow", remote: :true do %>
+      <span>フォロー中</span>
+    <% end %>
+  <% else %>
+    <%= link_to user_relationships_path(user.id), method: :post, class: "btn follow-btn follow", remote: :true do %>
+      <i class="fas fa-plus"></i>
+      <span>フォロー</span>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>マイアカウント</p>
+<% end %>

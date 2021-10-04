@@ -1,9 +1,11 @@
 <div id="comment-flash"><%= render "comments/flash" %></div><br>
 
 <%= comments.count %>件コメント
-<h6>
-  <%= link_to "もっと見る....", "#collapseExample", class: "btn", "data-bs-toggle": :"collapse", role: "button", "aria-expanded": :"false", "aria-controls": :"collapseExample" %>
-</h6>
+<% if comments.count >= 3 %>
+  <h6>
+    <%= link_to "もっと見る....", "#collapseExample", class: "btn", "data-bs-toggle": :"collapse", role: "button", "aria-expanded": :"false", "aria-controls": :"collapseExample" %>
+  </h6>
+<% end %>
 <% comments.first(2).each do |comment| %>
   <% if comment.id.present? %>
     <li class="comment-box mt-2" id="comment_<%= comment.id %>">

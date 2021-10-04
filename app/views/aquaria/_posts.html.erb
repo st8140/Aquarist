@@ -67,12 +67,12 @@
         </div>
       </div>
     </div>
-      <%= link_to aquarium_path(aquarium) do %>
-        <% if aquarium.persisted? && aquarium.aquarium_image? %>
-          <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
-        <% else %>
-          <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
-        <% end %>
+    <%= link_to aquarium_path(aquarium) do %>
+      <% if aquarium.persisted? && aquarium.aquarium_image? %>
+        <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+      <% else %>
+        <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
       <% end %>
+    <% end %>
   </div>
 </div>

@@ -29,7 +29,7 @@ RSpec.describe "Aquarium", type: :system do
     end
   end
 
-  describe "投稿詳細ページ、リンク先の検証" do
+  describe "投稿詳細ページ、リンク先の検証", js: true, vcr: true do
     let(:other_user) { create(:user, name: 'other_user') }
     let!(:like) { create(:like, aquarium_id: aquarium.id, user_id: other_user.id) }
     before do
@@ -40,7 +40,7 @@ RSpec.describe "Aquarium", type: :system do
       expect(page).to have_link user.name, href: detail_path(user)
     end
 
-    scenario "いいねしたユーザーmodalが表示される", js: true, vcr: true do
+    scenario "いいねしたユーザーmodalが表示される" do
       find('.like-user').click
       expect(page).to have_content('other_user')
     end

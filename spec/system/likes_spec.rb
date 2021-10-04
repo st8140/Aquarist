@@ -45,7 +45,8 @@ RSpec.describe "Like", type: :system do
 
   describe "アカウント投稿一覧画面の検証" do
     before do
-      visit users_posts_path(user_2.id)
+      visit detail_path(user_2.id)
+      click_on '投稿一覧'
     end
 
     scenario "新規いいねに成功する", js: true, vcr: true do
@@ -66,7 +67,8 @@ RSpec.describe "Like", type: :system do
         user_id: user_1.id,
         aquarium_id: aquarium.id
       )
-      visit users_liked_aquaria_path(user_1.id)
+      visit detail_path(user_1.id)
+      click_on 'いいねした投稿'
     end
     
     scenario "いいねの取り消しに成功する", js: true do

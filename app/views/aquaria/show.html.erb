@@ -15,52 +15,104 @@
         </div>
       </div>
 
-      <div class="row p-4 ms-1">
-        <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
-        <div class="col-lg-7 col-sm-6 ms-5">
-          <span>
-            <%= link_to @aquarium.user.name, detail_path(@aquarium.user.id),  class: "user-name" %>
-          </span>
-          <br>
-          <p class="time-stamp">
-            <%= "#{time_ago_in_words(@aquarium.created_at)}前に投稿" %>
-          </p>
-          <p class="introduction pt-2">
-            <%= @aquarium.aquarium_introduction %>
-          </p>
-          <div class="row">
-            <div class="col-lg-8">
-              <% if current_user.already_liked?(@aquarium) %>
-                <%= link_to aquarium_likes_path(@aquarium), method: "delete" do %>
-                  <span class="fas fa-heart like-btn"></span>
+      <div class="p-4 ms-1 d-none d-md-block">
+        <div class="row">
+          <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-lg-1 col-sm-1" %>
+          <div class="col-lg-7 col-sm-6 ms-5">
+            <span>
+              <%= link_to @aquarium.user.name, detail_path(@aquarium.user.id),  class: "user-name" %>
+            </span>
+            <br>
+            <p class="time-stamp">
+              <%= "#{time_ago_in_words(@aquarium.created_at)}前に投稿" %>
+            </p>
+            <p class="introduction pt-2">
+              <%= @aquarium.aquarium_introduction %>
+            </p>
+            <div class="row">
+              <div class="col-lg-8">
+                <% if current_user.already_liked?(@aquarium) %>
+                  <%= link_to aquarium_likes_path(@aquarium), method: "delete" do %>
+                    <span class="fas fa-heart like-btn"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to aquarium_likes_path(@aquarium), method: "post" do %>
+                    <span class="fas fa-heart unlike-btn"></span>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <%= link_to aquarium_likes_path(@aquarium), method: "post" do %>
-                  <span class="fas fa-heart unlike-btn"></span>
-                <% end %>
-              <% end %>
-              <span class="likes-count"><%= @aquarium.likes.count %></span>
+                <span class="likes-count"><%= @aquarium.likes.count %></span>
 
-              <% if @aquarium.likes.count > 0 %>
-                <span class="like-user">
-                  <%= link_to "いいねしたユーザー", "#", "data-bs-toggle": :"modal", "role": :"button", "data-bs-target": :"#likeModal" %>
-                </span>
-              <% end %>
-            </div>
-
-            <% if @aquarium.user.id == current_user.id%>
-              <div class="col-lg-4 text-end">
-                <%= link_to edit_aquarium_path, remote: true, class: "me-2 text-success", id: "edit-button" do %>
-                  <i class="fas fa-edit"></i>
-                <% end %>
-                <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger", id: "delete-button" do %>
-                  <i class="fas fa-trash-alt"></i>
+                <% if @aquarium.likes.count > 0 %>
+                  <span class="like-user">
+                    <%= link_to "いいねしたユーザー", "#", "data-bs-toggle": :"modal", "role": :"button", "data-bs-target": :"#likeModal" %>
+                  </span>
                 <% end %>
               </div>
-            <% end %>
+
+              <% if @aquarium.user.id == current_user.id%>
+                <div class="col-lg-4 text-end">
+                  <%= link_to edit_aquarium_path, remote: true, class: "me-2 text-success", id: "edit-button" do %>
+                    <i class="fas fa-edit"></i>
+                  <% end %>
+                  <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger", id: "delete-button" do %>
+                    <i class="fas fa-trash-alt"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="d-md-none">
+        <div class="row">
+          <%= link_to image_tag(@aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(@aquarium.user.id), class: "col-sm-2 col-3" %>
+          <div class="col-6">
+            <p class="user-name">
+              <%= link_to @aquarium.user.name, detail_path(@aquarium.user.id) %>
+            </p>
+            <br>
+            <p class="time-stamp">
+              <%= "#{time_ago_in_words(@aquarium.created_at)}前に投稿" %>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <p class="introduction">
+            <%= @aquarium.aquarium_introduction %>
+          </p>
+          
+          <div class="likes-buttons" id="likesButtons-sp-<%= @aquarium.id %>">
+            <% if current_user.already_liked?(@aquarium) %>
+              <%= link_to aquarium_likes_path(@aquarium), method: "delete" do %>
+                <span class="fas fa-heart like-btn"></span>
+              <% end %>
+            <% else %>
+              <%= link_to aquarium_likes_path(@aquarium), method: "post" do %>
+                <span class="fas fa-heart unlike-btn"></span>
+              <% end %>
+            <% end %>
+            <span class="likes-count"><%= @aquarium.likes.count %></span>
+            <% if @aquarium.likes.count > 0 %>
+              <span class="like-user">
+                <%= link_to "いいねしたユーザー", "#", "data-bs-toggle": :"modal", "role": :"button", "data-bs-target": :"#likeModal" %>
+              </span>
+            <% end %>
+          </div>
+
+          <% if @aquarium.user.id == current_user.id%>
+            <div class="col-lg-4 text-end">
+              <%= link_to edit_aquarium_path, remote: true, class: "me-2 text-success", id: "edit-button" do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to aquarium_path(@aquarium), method: :delete, :data => {:confirm => '本当に削除しますか?'}, class: "text-danger", id: "delete-button" do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
       <div class="border-bottom"></div>
       <div class="container mt-3">
         <div id="comment-form">
