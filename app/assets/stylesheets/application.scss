@@ -266,6 +266,16 @@ a.nav-link.me-4 {
   }
 }
 
+@media screen and (max-width:576px) {
+  #user-nav-pc {
+    .nav-item {
+      .nav-link {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
 @media screen and (max-width:457px) {
   .nav-sp-flame {
 
@@ -404,7 +414,7 @@ a.nav-link.me-4 {
 }
 
 .show-box {
-  max-width: 1140px;
+  max-width: 880px;
   margin: 0 auto;
 }
 
@@ -506,12 +516,6 @@ a.nav-link.me-4 {
 
 // ------------------------------------------ users/sessions/new ------------------------------------------ //
 
-.devise-form h2 {
-  font-size: 45px;
-  margin-bottom: 60px;
-  letter-spacing: 3px;
-}
-
 .field {
   margin-top: 15px;
 }
@@ -533,6 +537,12 @@ a.nav-link.me-4 {
   background-color: white;
   border-radius: 20px;
   padding: 50px 120px;
+
+  h2 {
+    font-size: 45px;
+    margin-bottom: 60px;
+    letter-spacing: 3px;
+  }
 }
 
 .devise-inner {
@@ -551,6 +561,16 @@ a.nav-link.me-4 {
 
 .test-user-login a {
   color: #fff !important;
+}
+
+@media screen and(max-width:576px) {
+  .devise-form h2 {
+    font-size: 20px;
+  }
+
+  .devise-inner a {
+    font-size: 14px;
+  }
 }
 
 // ------------------------------------------ users/registrations/detail ------------------------------------------ //
@@ -669,7 +689,7 @@ a.nav-link.active {
   width: 100px;
 }
 
-.container.user.pb-4 {
+.user.pb-4 {
   padding-left: initial;
   padding-right: initial;
 }

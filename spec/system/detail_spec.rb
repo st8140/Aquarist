@@ -123,6 +123,136 @@ RSpec.describe "User", type: :system do
         expect(page).to have_css('.follow-btn')
       end
     end
-
   end
+
+  describe "ページネーションの検証", js: true , vcr: true do
+    context "投稿数が16件以上の場合" do
+      let!(:aquaria) { create_list(:aquarium, 15, user_id: user.id) }
+      before do
+        click_on '投稿一覧'
+      end
+      
+      scenario "ページネーションが表示される" do
+        expect(page).to have_css '.pagination'
+      end
+
+      scenario "次のページが表示される" do
+        within '.pagination' do
+          click_link '2'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '2'
+        end
+        expect(page).to have_css '.posts-box'
+      end
+  
+      scenario "前のページに戻れる" do
+        within '.pagination' do
+          click_link '2'
+          click_link '1'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '1'
+        end
+        expect(page).to have_css '.posts-box'
+      end
+    end
+
+    context "いいねした投稿が16件以上の場合" do
+      let!(:liked_aquaria) { create_list(:like, 15, user_id: user.id) }
+      before do
+        click_on 'いいねした投稿'
+      end
+      
+      scenario "ページネーションが表示される" do
+        expect(page).to have_css '.pagination'
+      end
+
+      scenario "次のページが表示される" do
+        within '.pagination' do
+          click_link '2'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '2'
+        end
+        expect(page).to have_css '.liked-aquaria-box'
+      end
+  
+      scenario "前のページに戻れる" do
+        within '.pagination' do
+          click_link '2'
+          click_link '1'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '1'
+        end
+        expect(page).to have_css '.liked-aquaria-box'
+      end
+    end
+
+    context "フォロー数が16件以上の場合" do
+      let!(:follow) { create_list(:relationship, 16, following_id: user.id) }
+      before do
+        click_on 'フォロー'
+      end
+      
+      scenario "ページネーションが表示される" do
+        expect(page).to have_css '.pagination'
+      end
+
+      scenario "次のページが表示される" do
+        within '.pagination' do
+          click_link '2'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '2'
+        end
+        expect(page).to have_css '.follows-box'
+      end
+  
+      scenario "前のページに戻れる" do
+        within '.pagination' do
+          click_link '2'
+          click_link '1'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '1'
+        end
+        expect(page).to have_css '.follows-box'
+      end
+    end
+
+    context "フォロワー数が16件以上の場合" do
+      let!(:followers) { create_list(:relationship, 16, follower_id: user.id) }
+      before do
+        click_on 'フォロワー'
+      end
+      
+      scenario "ページネーションが表示される" do
+        expect(page).to have_css '.pagination'
+      end
+
+      scenario "次のページが表示される" do
+        within '.pagination' do
+          click_link '2'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '2'
+        end
+        expect(page).to have_css '.followers-box'
+      end
+  
+      scenario "前のページに戻れる" do
+        within '.pagination' do
+          click_link '2'
+          click_link '1'
+        end
+        within '.page-item.active' do
+          expect(page).to have_selector '.page-link', text: '1'
+        end
+        expect(page).to have_css '.followers-box'
+      end
+    end
+  end
+
 end

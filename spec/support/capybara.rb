@@ -11,7 +11,7 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   options.add_argument('--headless')
   options.add_argument('--no-sandbox')
   options.add_argument('--disable-dev-shm-usage')
-  options.add_argument('--window-size=1680,1400')
+  options.add_argument('--window-size=1440,990')
   options.add_argument('--remote-debugging-port=9222')
   options.add_argument('--remote-debugging-address=0.0.0.0')
 

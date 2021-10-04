@@ -1,12 +1,12 @@
 <div class="modal fade" id="new-modal" tabindex="-1" aria-hidden="true", role="dialog"></div>
-<div class="container user pb-4">
-  <div class="col bg-color user-posts">
+<div class="user pb-4">
+  <div class="col bg-color user-posts pt-4">
     <% if current_user.id == user.id %>
       <%= link_to "新規投稿", new_aquarium_path, class: "btn-circle", remote: true %>
     <% end %>
 
     <% aquaria.each do |aquarium| %>
-      <div class="posts-box d-none d-lg-block shadow p-3 mb-5 bg-white rounded">
+      <div class="container posts-box d-none d-lg-block shadow p-3 mb-5 bg-white rounded">
         <div class="row">
           <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-lg-1 col-sm-1" %>
           <div class="col-lg-7 col-sm-6 ms-2">
@@ -45,7 +45,7 @@
       </div>
 
       <div class="d-lg-none">
-        <div class="posts-sp-box shadow p-3 mb-5 bg-white rounded">
+        <div class="container posts-sp-box shadow p-3 mb-5 bg-white rounded">
           <div class="row">
             <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-sm-2 col-3" %>
             <div class="col-6">
@@ -87,4 +87,4 @@
     <% end %>
   </div>
 </div>
-<%= paginate aquaria %>
+<%= paginate aquaria, remote: true %>

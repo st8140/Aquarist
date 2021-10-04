@@ -19,6 +19,7 @@ class User < ApplicationRecord
   mount_uploader :profile_image, UserImageUploader
 
   validates :name, presence: true
+  validates :introduction, length: { maximum: 140 }
 
   def aquaria
     Aquarium.where(user_id: id)
