@@ -5,7 +5,7 @@
     <div class="profile-area">
       <div class="profile-background-container">
         <% if @user.profile_image? %>
-          <%= image_tag(@user.profile_image.to_s, class: "profile-background-image") %>
+          <%= image_tag(@user.profile_image.url, class: "profile-background-image") %>
         <% else %>
           <%= image_tag("profile_default_image", class: "profile-background-image") %>
         <% end %>
