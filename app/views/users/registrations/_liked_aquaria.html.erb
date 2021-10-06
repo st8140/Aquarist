@@ -45,48 +45,48 @@
         </div>
       </div>
 
-    <div class="d-lg-none">
-      <div class="container posts-sp-box shadow p-3 mb-5 bg-white rounded">
-        <div class="row">
-          <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-sm-2 col-3" %>
-          <div class="col-6">
-            <p class="user-name">
-              <%= link_to aquarium.user.name, detail_path(aquarium.user.id) %>
-            </p>
-            <br>
-            <p class="time-stamp">
-              <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
-            </p>
+      <div class="d-lg-none">
+        <div class="container posts-sp-box shadow p-3 mb-5 bg-white rounded">
+          <div class="row">
+            <%= link_to image_tag(aquarium.user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon"), detail_path(aquarium.user.id), class: "col-sm-2 col-3" %>
+            <div class="col-6">
+              <p class="user-name">
+                <%= link_to aquarium.user.name, detail_path(aquarium.user.id) %>
+              </p>
+              <br>
+              <p class="time-stamp">
+                <%= "#{time_ago_in_words(aquarium.created_at)}前に投稿" %>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <p class="introduction">
-            <%= aquarium.aquarium_introduction %>
-          </p>
-          <div class="like-comment">
-            <% if current_user.id == @user.id %>
-              <div class="likes-buttons" id="likesButtons-<%= aquarium.id %>">
-                <%= render partial: "likes/like", locals: { aquarium: aquarium } %>
-              </div>
+          <div class="row">
+            <p class="introduction">
+              <%= aquarium.aquarium_introduction %>
+            </p>
+            <div class="like-comment">
+              <% if current_user.id == @user.id %>
+                <div class="likes-buttons" id="likesButtons-<%= aquarium.id %>">
+                  <%= render partial: "likes/like", locals: { aquarium: aquarium } %>
+                </div>
 
-              <div class="comment-count">
-                <%= link_to aquarium_path(aquarium, anchor: "comment-form"), class: "comment-link" do %>
-                  <span class="far fa-comment-dots"></span>
-                <% end %>
-                <%= aquarium.comments.count %>
-              </div>
-            <% end %>
+                <div class="comment-count">
+                  <%= link_to aquarium_path(aquarium, anchor: "comment-form"), class: "comment-link" do %>
+                    <span class="far fa-comment-dots"></span>
+                  <% end %>
+                  <%= aquarium.comments.count %>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <%= link_to aquarium_path(aquarium) do %>
-          <% if aquarium.persisted? && aquarium.aquarium_image? %>
-            <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
-          <% else %>
-            <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+          <%= link_to aquarium_path(aquarium) do %>
+            <% if aquarium.persisted? && aquarium.aquarium_image? %>
+              <%= image_tag(aquarium.aquarium_image.to_s, alt: "aquarium_image", class: "img-thumbnail") %>
+            <% else %>
+              <%= image_tag("no_image.jpg", alt: "aquarium_image", class: "img-thumbnail") %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
     <% end %>
   </div>
 </div>
