@@ -7,12 +7,16 @@
         <% if @user.profile_image? %>
           <%= image_tag(@user.profile_image.url, class: "profile-background-image") %>
         <% else %>
-          <%= image_tag("profile_default_image", class: "profile-background-image") %>
+          <%= image_tag("profile_default_image.jpg", class: "profile-background-image") %>
         <% end %>
       </div>
       <div class="user-photo-name row">
         <div class="col-2">
-          <%= image_tag(@user.user_image.to_s, alt: "user_image", class: "host-icon profile-icon") %>
+          <% if @user.user_image? %>
+            <%= image_tag(@user.user_image.to_s, alt: "user_image", class: "host-icon profile-icon") %>
+          <%  else %>
+            <%= image_tag("default_user.jpeg", alt: "user_image", class: "host-icon profile-icon") %>
+          <%  end %>
         </div>
         <h2 class="col-4"><%= @user.name %></h2>
       </div>
@@ -52,22 +56,20 @@
       </div>
     </div>
 
-    <div id="app">
-      <ul class="nav nav-fill" id="user-nav-pc">
-        <li class="nav-item">
-          <%= link_to "投稿一覧", users_posts_path, class: "nav-link", remote: :true %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "いいねした投稿", users_liked_aquaria_path, class: "nav-link", remote: :true %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "フォロー", follows_user_path(@user.id), class: "nav-link follow-link", remote: :true %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "フォロワー", followers_user_path(@user.id), class: "nav-link follower-link", remote: :true %>
-        </li>
-      </ul>
-    </div>
+    <ul class="nav nav-fill" id="user-nav-pc">
+      <li class="nav-item">
+        <%= link_to "投稿一覧", users_posts_path, class: "nav-link", remote: :true %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "いいねした投稿", users_liked_aquaria_path, class: "nav-link", remote: :true %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "フォロー", follows_user_path(@user.id), class: "nav-link follow-link", remote: :true %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "フォロワー", followers_user_path(@user.id), class: "nav-link follower-link", remote: :true %>
+      </li>
+    </ul>
   </div>
 </div>
 <div class="detail-container container">
