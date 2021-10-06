@@ -16,11 +16,7 @@
           <div class="d-lg-block d-none">
             <li class="nav-item dropdown" id="current_user">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <% if current_user.persisted? && current_user.user_image? %>
-                  <%= image_tag(current_user.user_image.to_s, alt: "user_image", class: "host-icon") %>
-                <% else %>
-                  <%= image_tag("default_user.png", alt: "user_icon", class: "host-icon") %>
-                <% end %>
+                <%= image_tag(current_user.user_image.to_s, alt: "user_image", class: "host-icon") %>
                 <%= current_user.name %>
               </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
