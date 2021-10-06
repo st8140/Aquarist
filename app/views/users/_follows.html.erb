@@ -8,7 +8,13 @@
           <li class="follows-box col-lg-4 shadow-sm p-3 mb-5 rounded">
             <div class="row">
               <article class="col-sm-2">
-                <%= link_to image_tag(user.user_image.to_s, alt: "user-icon", class: "host-icon follow-icon"), detail_path(user.id) %>
+                <%= link_to detail_path(user.id), class: "col-lg-1 col-sm-1" do %>
+                  <% if user.user_image? %>
+                    <%= image_tag(user.user_image.to_s, alt: "user-icon", size: "70", class: "host-icon follow-icon") %>
+                  <% else %>
+                    <%= image_tag("default_user.jpeg", alt: "user-icon", size: "70", class: "host-icon follow-icon") %>
+                  <% end %>
+                <% end %>
               </article>
               <article class="col-sm-6 ms-1">
                 <p><%= link_to user.name, detail_path(user.id) %></p>
